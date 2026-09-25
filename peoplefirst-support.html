@@ -28,7 +28,7 @@
 <a href="#main" class="visually-hidden">Skip to content</a>
 <header class="site-header">
   <div class="container">
-    <a href="index.html" class="brand"><span class="dot"></span> CodeBlue Technology</a>
+    <a href="index.html" class="brand"><span class="mark"></span> CodeBlue Technology</a>
     <nav class="nav-desktop" aria-label="Primary">
       <div class="nav-item has-mega">
         <a class="nav-link" href="managed-it.html">Solutions</a>
@@ -48,7 +48,7 @@
   <div class="nav-item"><a class="nav-link" href="careers.html">Careers</a></div>
     </nav>
     <div class="header-actions">
-      <a class="header-phone" href="tel:+18045217660">(804) 521-7660</a>
+      <a class="header-phone mono" href="tel:+18045217660">(804) 521-7660</a>
       <a class="btn btn-primary" href="contact.html">Talk to a Rep</a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
     </div>
@@ -77,26 +77,53 @@
 <main id="main">
 <section class="hero">
   <div class="container">
-    <div>
-      <span class="eyebrow" style="color:#8fc2ff;">Flagship Offer</span>
-      <h1>Support that follows your team, not your equipment.</h1>
-      <p class="lead">One flat rate per person &mdash; not per device. PeopleFirst Support covers everything a team member touches: hardware, software, vendors, and cyber security, on-site and remote.</p>
-      <div class="hero-ctas">
-        <a href="contact.html" class="btn btn-primary">Talk to a Rep</a>
-        <a href="#pricing" class="btn btn-outline">How pricing works</a>
+    <div class="hero-inner">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="label">Flagship offer</span>
+          <h1>Support that follows your team, not your equipment.</h1>
+          <p class="lead">One flat rate per person, not per device. PeopleFirst Support covers everything a team member touches: hardware, software, vendors, and cyber security, on-site and remote.</p>
+          <div class="hero-ctas"><a href="contact.html" class="btn btn-primary">Talk to a Rep</a><a href="#pricing" class="btn btn-ghost">How pricing works</a></div>
+        </div>
+        <div class="hero-media">
+          <svg class="material-panel" viewBox="0 0 900 700" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="alu-3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="var(--alu-100)"/>
+      <stop offset="55%" stop-color="var(--alu-200)"/>
+      <stop offset="100%" stop-color="var(--alu-300)"/>
+    </linearGradient>
+    <linearGradient id="brand-strip-3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="var(--brand-blue)"/>
+      <stop offset="100%" stop-color="var(--brand-green)"/>
+    </linearGradient>
+    <pattern id="brush-3" width="6" height="6" patternTransform="rotate(8)" patternUnits="userSpaceOnUse">
+      <rect width="6" height="6" fill="transparent"/>
+      <line x1="0" y1="0" x2="0" y2="6" stroke="rgba(0,0,0,0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="900" height="700" fill="url(#alu-3)"/>
+  <rect width="900" height="700" fill="url(#brush-3)"/>
+  <rect x="-19" y="560" width="1000" height="46" fill="url(#brand-strip-3)" opacity="0.9" transform="rotate(-3 450 580)"/>
+  <circle cx="450" cy="330" r="168" fill="rgba(255,255,255,0.32)" stroke="rgba(255,255,255,0.55)" stroke-width="1.5"/>
+  <circle cx="450" cy="330" r="168" fill="none" stroke="var(--line)" stroke-width="1"/>
+  <g transform="translate(390 270)" fill="none" stroke="var(--brand-green-deep)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="45" cy="42" r="18"/><circle cx="78" cy="52" r="14"/><path d="M18 96c0-16 12-27 27-27s27 11 27 27M60 96c2-13 11-21 24-21s24 8 24 21"/>
+  </g>
+</svg>
+        </div>
       </div>
     </div>
-    <div class="hero-art">Hero visual placeholder</div>
   </div>
 </section>
 
-<div class="proof-bar">
+<div class="stat-strip">
   <div class="container">
     <ul>
-      <li><strong>2003</strong> Founded in Richmond, VA</li>
-      <li><strong>550+</strong> Active clients</li>
-      <li><strong>20+ yrs</strong> Central Virginia trust</li>
-      <li><strong>DCJS</strong> Licensed security techs</li>
+      <li><strong class="mono">2003</strong><span>Founded in Richmond, VA</span></li>
+      <li><strong class="mono">550+</strong><span>Active clients</span></li>
+      <li><strong class="mono">20+</strong><span>Years in Central Virginia</span></li>
+      <li><strong class="mono">DCJS</strong><span>Licensed security techs</span></li>
     </ul>
   </div>
 </div>
@@ -104,58 +131,85 @@
 <section class="section" id="pricing">
   <div class="container">
     <div class="section-head">
-      <div class="divider"></div>
-      <span class="eyebrow">How Pricing Works</span>
+      <div class="brand-rule"></div>
       <h2>Plain-language pricing, no per-device math</h2>
     </div>
-    <p style="max-width:60ch;">Most IT plans price per device &mdash; the more laptops, phones, and servers your team uses, the higher the bill, no matter how it's used. PeopleFirst flips that: every enrolled team member gets one flat monthly rate that covers every device and tool they touch. Enroll your whole staff and the math gets simpler, not more expensive.</p>
+    <p>Most IT plans price per device. The more laptops, phones, and servers your team uses, the higher the bill, no matter how it's used. PeopleFirst flips that: every enrolled team member gets one flat monthly rate that covers every device and tool they touch. Enroll your whole staff and the math gets simpler, not more expensive.</p>
   </div>
 </section>
 
-<section class="section section-alt">
+<section class="section" style="padding-top:0;">
   <div class="container">
     <div class="section-head">
-      <div class="divider"></div>
-      <span class="eyebrow">What's Included</span>
-      <h2>Four things, covered for every person</h2>
+      <div class="brand-rule"></div>
+      <h2>Six things, covered for every person</h2>
     </div>
-    <div class="grid grid-4">
-      <div class="card"><div class="icon">1</div><h3>Hardware Support</h3><p>Every device your team member uses, covered.</p></div>
-      <div class="card"><div class="icon">2</div><h3>Software Support</h3><p>Installs, updates, and troubleshooting included.</p></div>
-      <div class="card"><div class="icon">3</div><h3>3rd-Party Vendor Support</h3><p>We're the ones on hold with your vendors.</p></div>
-      <div class="card"><div class="icon">4</div><h3>Cyber Security</h3><p>Endpoint protection and training built in.</p></div>
+    <div class="bento">
+      <div class="tile b-md tile-brand reveal"><span class="icon">01</span><h3>Vendor Management</h3><p>We're the ones on hold with your vendors, not you.</p></div>
+      <div class="tile b-md reveal"><span class="icon">02</span><h3>Provided Equipment</h3><p>Hardware sourced, provisioned, and supported as part of the plan.</p></div>
+      <div class="tile b-md tile-accent reveal"><span class="icon">03</span><h3>Licensing Management</h3><p>Software licensing kept organized, current, and compliant.</p></div>
+      <div class="tile b-md reveal"><span class="icon">04</span><h3>vCIO / CISO Services</h3><p>Strategic technology and security guidance at the leadership level.</p></div>
+      <div class="tile b-md reveal"><span class="icon">05</span><h3>Risk Assessments</h3><p>Regular assessments that catch exposure before it becomes an incident.</p></div>
+      <div class="tile b-md tile-accent reveal"><span class="icon">06</span><h3>On-Site / Remote Support</h3><p>Help wherever your team is working, in the office or out.</p></div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section" style="padding-top:0;">
   <div class="container">
-    <div class="section-head">
-      <div class="divider"></div>
-      <span class="eyebrow">Behind the Tech</span>
-      <h2>A Client Advocate who actually knows your team</h2>
+    <div class="split reveal">
+      <div class="split-media">
+        <svg class="material-panel" viewBox="0 0 900 700" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="alu-91" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="var(--alu-100)"/>
+      <stop offset="55%" stop-color="var(--alu-200)"/>
+      <stop offset="100%" stop-color="var(--alu-300)"/>
+    </linearGradient>
+    <linearGradient id="brand-strip-91" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="var(--brand-blue)"/>
+      <stop offset="100%" stop-color="var(--brand-green)"/>
+    </linearGradient>
+    <pattern id="brush-91" width="6" height="6" patternTransform="rotate(8)" patternUnits="userSpaceOnUse">
+      <rect width="6" height="6" fill="transparent"/>
+      <line x1="0" y1="0" x2="0" y2="6" stroke="rgba(0,0,0,0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="900" height="700" fill="url(#alu-91)"/>
+  <rect width="900" height="700" fill="url(#brush-91)"/>
+  <rect x="-3" y="560" width="1000" height="46" fill="url(#brand-strip-91)" opacity="0.9" transform="rotate(-3 450 580)"/>
+  <circle cx="450" cy="330" r="168" fill="rgba(255,255,255,0.32)" stroke="rgba(255,255,255,0.55)" stroke-width="1.5"/>
+  <circle cx="450" cy="330" r="168" fill="none" stroke="var(--line)" stroke-width="1"/>
+  <g transform="translate(390 270)" fill="none" stroke="var(--brand-green-deep)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="45" cy="42" r="18"/><circle cx="78" cy="52" r="14"/><path d="M18 96c0-16 12-27 27-27s27 11 27 27M60 96c2-13 11-21 24-21s24 8 24 21"/>
+  </g>
+</svg>
+      </div>
+      <div>
+        <span class="label">Behind the tech</span>
+        <h2>A Client Advocate who actually knows your team</h2>
+        <p>Every PeopleFirst account gets a dedicated Client Advocate, a real point of contact who knows your environment, tracks recurring issues, and escalates on your behalf instead of routing you through a ticket queue.</p>
+      </div>
     </div>
-    <p style="max-width:60ch;">Every PeopleFirst account gets a dedicated Client Advocate &mdash; a real point of contact who knows your environment, tracks recurring issues, and escalates on your behalf instead of routing you through a ticket queue.</p>
   </div>
 </section>
 
-<section class="section section-alt">
+<section class="section" style="padding-top:0;">
   <div class="container">
     <div class="section-head center">
-      <div class="divider"></div>
-      <span class="eyebrow">Old vs. New</span>
-      <h2>People-based vs. device/license-based support</h2>
+      <div class="brand-rule"></div>
+      <h2>People-based vs. device or license-based support</h2>
     </div>
-    <div class="grid grid-2">
-      <div class="card">
-        <h3>Device/License-Based (old model)</h3>
+    <div class="bento" style="grid-template-columns:1fr 1fr;">
+      <div class="card reveal">
+        <h3>Device / License-Based (old model)</h3>
         <ul>
           <li>Price grows with every device added</li>
           <li>Coverage gaps between devices and licenses</li>
           <li>Vendor issues are your problem to chase</li>
         </ul>
       </div>
-      <div class="card" style="border-color:var(--sky); box-shadow:var(--shadow-lg);">
+      <div class="card reveal" style="border-color:var(--brand-green); box-shadow:0 18px 36px rgba(122,154,1,0.16);">
         <h3>PeopleFirst (per-person)</h3>
         <ul>
           <li>One flat rate per team member</li>
@@ -167,15 +221,15 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section" style="padding-top:0;">
   <div class="container">
-    <div class="grid grid-2" style="align-items:start;">
+    <div class="split reveal">
       <div class="card">
         <h3>PeopleFirst Support Guide</h3>
         <p>Download the full breakdown of what's included, how enrollment works, and real client examples.</p>
-        <a href="resources.html" class="btn btn-outline-navy">Get the PDF &rarr;</a>
+        <a href="resources.html" class="btn btn-ghost">Get the PDF</a>
       </div>
-      <div class="rep-form animate-in">
+      <div class="rep-form card reveal">
   <h3>Talk to a Rep</h3>
   <p class="sub">A CodeBlue rep will call, text, or email you within 1 business hour.</p>
   <form>
@@ -202,7 +256,7 @@
     <button type="submit" class="btn btn-primary btn-block">Send &amp; Get a Callback</button>
   </form>
   <div class="form-confirm">A CodeBlue rep will call, text, or email you within 1 business hour. Prefer to talk now? Call (804) 521-7660.</div>
-  <p class="form-note">Want to pre-qualify yourself in more detail first? <a href="contact.html#full-form">Use the full form instead &rarr;</a></p>
+  <p class="form-note">Want more detail before a rep calls? <a href="contact.html#full-form">Use the full form instead.</a></p>
 </div>
     </div>
   </div>
@@ -213,7 +267,7 @@
     <div class="footer-grid">
       <div>
         <h4>CodeBlue Technology</h4>
-        <p style="color:rgba(255,255,255,0.65); max-width:34ch;">Founded 2003 in Richmond, VA. 550+ active clients across Central Virginia and the Northern Neck. Managed IT, cyber security, data cabling, VoIP, and premise security &mdash; support that follows your team, not your equipment.</p>
+        <p style="color:rgba(246,245,242,0.62); max-width:34ch;">Founded 2003 in Richmond, VA. 550+ active clients across Central Virginia and the Northern Neck. Managed IT, cyber security, data cabling, VoIP, and premise security. Support that follows your team, not your equipment.</p>
         <div class="footer-social">
           <a href="#">Facebook</a><a href="#">LinkedIn</a><a href="#">Instagram</a><a href="#">Podcast</a>
         </div>
@@ -250,8 +304,8 @@
   </div>
 </footer>
 <div class="call-bar">
-  <a href="tel:+18045217660">&#128222; Call (804) 521-7660</a>
-  <a href="sms:+18045217660">&#128172; Text Us</a>
+  <a href="tel:+18045217660">Call (804) 521-7660</a>
+  <a href="sms:+18045217660">Text Us</a>
 </div>
 <script src="js/main.js"></script>
 <script>document.getElementById("year").textContent = new Date().getFullYear();</script>

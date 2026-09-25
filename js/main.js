@@ -1,4 +1,4 @@
-// CodeBlue Technology — shared site behavior (no framework, no build step)
+// CodeBlue Technology - shared site behavior (no framework, no build step)
 
 document.addEventListener("DOMContentLoaded", function () {
   // Mobile nav toggle
@@ -22,4 +22,28 @@ document.addEventListener("DOMContentLoaded", function () {
       if (wrapper) wrapper.classList.add("submitted");
     });
   });
+
+  // Scroll-reveal: fade/rise elements marked .reveal as they enter view.
+  // Elements are visible by default (see CSS). Only once we know the
+  // observer is live do we "arm" them (add .reveal-armed, which is what
+  // actually hides them pending .in). This guarantees content is never
+  // stuck invisible if this script fails to load or errors out.
+  var revealTargets = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && revealTargets.length) {
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+    );
+    revealTargets.forEach(function (el) {
+      el.classList.add("reveal-armed");
+      io.observe(el);
+    });
+  }
 });
