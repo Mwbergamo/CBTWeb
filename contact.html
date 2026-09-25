@@ -118,8 +118,81 @@
         <strong>Warsaw:</strong> <a href="tel:+18044564500">(804) 456-4500</a><br>
         <strong>Email:</strong> <a href="mailto:hello@codebluetechnology.com">hello@codebluetechnology.com</a><br>
         <strong>Service requests:</strong> <a href="mailto:service@codebluetechnology.com">service@codebluetechnology.com</a></p>
-        <p id="full-form" style="margin-top:20px;">Want to pre-qualify yourself with more detail before a rep calls? The full intake form is available as a secondary option. Ask your rep for the link, or we'll add a dedicated long-form page here.</p>
       </div>
+    </div>
+    <div id="full-form" style="max-width:900px; margin:20px auto 0;">
+      <details class="full-form-toggle card reveal">
+  <summary>Prefer to fill out the full form?</summary>
+  <div class="full-form-body">
+    <p class="sub">Give us more detail up front and your rep will come prepared. This is optional, not required to get a callback.</p>
+    <form>
+      <div class="field">
+        <label for="ff-name">Name</label>
+        <input id="ff-name" type="text" required placeholder="Your name">
+      </div>
+      <div class="field">
+        <label for="ff-company">Company</label>
+        <input id="ff-company" type="text" placeholder="Business name">
+      </div>
+      <div class="field">
+        <label for="ff-phone">Phone</label>
+        <input id="ff-phone" type="tel" placeholder="(804) 000-0000">
+      </div>
+      <div class="field">
+        <label for="ff-email">Email</label>
+        <input id="ff-email" type="email" placeholder="you@company.com">
+      </div>
+      <div class="field">
+        <label for="ff-contact-method">Preferred contact method</label>
+        <select id="ff-contact-method">
+          <option>Phone call</option>
+          <option>Text</option>
+          <option>Email</option>
+          <option>No preference</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>What do you need help with? (check all that apply)</label>
+        <div class="check-grid">
+          <label><input type="checkbox" name="services" value="Managed IT & PeopleFirst Support"> Managed IT & PeopleFirst Support</label>
+          <label><input type="checkbox" name="services" value="Cyber Security"> Cyber Security</label>
+          <label><input type="checkbox" name="services" value="Cloud & Data Center Hosting"> Cloud & Data Center Hosting</label>
+          <label><input type="checkbox" name="services" value="Voice / VoIP"> Voice / VoIP</label>
+          <label><input type="checkbox" name="services" value="Data Cabling"> Data Cabling</label>
+          <label><input type="checkbox" name="services" value="Premise Security & Cameras"> Premise Security & Cameras</label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="ff-users">Approximate number of employees/users</label>
+        <input id="ff-users" type="text" placeholder="e.g. 25">
+      </div>
+      <div class="field">
+        <label for="ff-day">Best day to reach you</label>
+        <select id="ff-day">
+          <option>Any weekday</option>
+          <option>Monday</option>
+          <option>Tuesday</option>
+          <option>Wednesday</option>
+          <option>Thursday</option>
+          <option>Friday</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="ff-time">Best time to reach you</label>
+        <select id="ff-time">
+          <option>Morning</option>
+          <option>Afternoon</option>
+          <option>Evening</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="ff-notes">Anything else we should know?</label>
+        <input id="ff-notes" type="text" placeholder="Optional">
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Send full details</button>
+    </form>
+  </div>
+</details>
     </div>
   </div>
 </section>

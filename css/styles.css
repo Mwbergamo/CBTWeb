@@ -379,6 +379,21 @@ button { font-family: inherit; cursor: pointer; }
 .rep-form.submitted form { display: none; }
 .rep-form.submitted .form-confirm { display: block; }
 
+/* ---- Full intake form (secondary, in a disclosure) ---- */
+.full-form-toggle { padding: 0; overflow: hidden; }
+.full-form-toggle summary {
+  cursor: pointer; padding: 20px 24px; font-weight: 650; list-style: none;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.full-form-toggle summary::-webkit-details-marker { display: none; }
+.full-form-toggle summary::after { content: "+"; color: var(--brand-green); font-size: 1.2rem; }
+.full-form-toggle[open] summary::after { content: "\2212"; }
+.full-form-toggle .full-form-body { padding: 4px 24px 24px; }
+.check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; margin-bottom: 4px; }
+@media (max-width: 520px) { .check-grid { grid-template-columns: 1fr; } }
+.check-grid label { display: flex; align-items: center; gap: 8px; font-size: 0.92rem; font-weight: 500; color: var(--ink-soft); }
+.check-grid input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--brand-green); flex: none; }
+
 /* ---- Scroll-snap pill row (industries etc.) ---- */
 .pill-row {
   display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x proximity;

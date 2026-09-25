@@ -33,7 +33,7 @@ TOP_NAV = [
     ("Careers", "careers.html"),
 ]
 
-def head(title, description):
+def head(title, description, prefix=""):
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -41,7 +41,7 @@ def head(title, description):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{description}">
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="{prefix}css/styles.css">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{description}">
 <meta property="og:type" content="website">
@@ -63,22 +63,22 @@ def head(title, description):
 <body>
 """
 
-def header(active=""):
-    mega_items = "\n".join(f'      <a href="{href}">{label}</a>' for label, href in NAV_SOLUTIONS)
+def header(active="", prefix=""):
+    mega_items = "\n".join(f'      <a href="{prefix}{href}">{label}</a>' for label, href in NAV_SOLUTIONS)
     top_items_parts = []
     for label, href in TOP_NAV:
         current = ' aria-current="page"' if href == active else ""
-        top_items_parts.append(f'  <div class="nav-item"><a class="nav-link" href="{href}"{current}>{label}</a></div>')
+        top_items_parts.append(f'  <div class="nav-item"><a class="nav-link" href="{prefix}{href}"{current}>{label}</a></div>')
     top_items = "\n".join(top_items_parts)
-    mobile_solutions = "\n".join(f'      <a class="sub-link" href="{href}">{label}</a>' for label, href in NAV_SOLUTIONS)
-    mobile_top = "\n".join(f'    <a href="{href}">{label}</a>' for label, href in TOP_NAV)
+    mobile_solutions = "\n".join(f'      <a class="sub-link" href="{prefix}{href}">{label}</a>' for label, href in NAV_SOLUTIONS)
+    mobile_top = "\n".join(f'    <a href="{prefix}{href}">{label}</a>' for label, href in TOP_NAV)
     return f"""<a href="#main" class="visually-hidden">Skip to content</a>
 <header class="site-header">
   <div class="container">
-    <a href="index.html" class="brand"><span class="mark"></span> CodeBlue Technology</a>
+    <a href="{prefix}index.html" class="brand"><span class="mark"></span> CodeBlue Technology</a>
     <nav class="nav-desktop" aria-label="Primary">
       <div class="nav-item has-mega">
-        <a class="nav-link" href="managed-it.html">Solutions</a>
+        <a class="nav-link" href="{prefix}managed-it.html">Solutions</a>
         <div class="mega-menu">
 {mega_items}
         </div>
@@ -87,7 +87,7 @@ def header(active=""):
     </nav>
     <div class="header-actions">
       <a class="header-phone mono" href="tel:{PHONE_TEL}">{PHONE}</a>
-      <a class="btn btn-primary" href="contact.html">Talk to a Rep</a>
+      <a class="btn btn-primary" href="{prefix}contact.html">Talk to a Rep</a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
     </div>
   </div>
@@ -98,13 +98,13 @@ def header(active=""):
 {mobile_solutions}
       </details>
 {mobile_top}
-      <a href="contact.html" style="margin-top:10px;">Contact</a>
+      <a href="{prefix}contact.html" style="margin-top:10px;">Contact</a>
     </div>
   </div>
 </header>
 """
 
-def footer():
+def footer(prefix=""):
     return f"""<footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
@@ -118,16 +118,16 @@ def footer():
       <div>
         <h4>Solutions</h4>
         <ul>
-          {"".join(f'<li><a href="{href}">{label}</a></li>' for label, href in NAV_SOLUTIONS)}
+          {"".join(f'<li><a href="{prefix}{href}">{label}</a></li>' for label, href in NAV_SOLUTIONS)}
         </ul>
       </div>
       <div>
         <h4>Company</h4>
         <ul>
-          <li><a href="about.html">About</a></li>
-          <li><a href="industries.html">Industries</a></li>
-          <li><a href="resources.html">Resources</a></li>
-          <li><a href="careers.html">Careers</a></li>
+          <li><a href="{prefix}about.html">About</a></li>
+          <li><a href="{prefix}industries.html">Industries</a></li>
+          <li><a href="{prefix}resources.html">Resources</a></li>
+          <li><a href="{prefix}careers.html">Careers</a></li>
         </ul>
       </div>
       <div>
@@ -136,7 +136,7 @@ def footer():
           <li><a href="tel:{PHONE_TEL}">Richmond: {PHONE}</a></li>
           <li><a href="tel:+18044564500">Warsaw: (804) 456-4500</a></li>
           <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
-          <li><a href="contact.html">Contact page</a></li>
+          <li><a href="{prefix}contact.html">Contact page</a></li>
         </ul>
       </div>
     </div>
@@ -150,13 +150,13 @@ def footer():
   <a href="tel:{PHONE_TEL}">Call {PHONE}</a>
   <a href="sms:{PHONE_TEL}">Text Us</a>
 </div>
-<script src="js/main.js"></script>
+<script src="{prefix}js/main.js"></script>
 <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>
 """
 
-def rep_form():
+def rep_form(prefix=""):
     return f"""<div class="rep-form card reveal">
   <h3>Talk to a Rep</h3>
   <p class="sub">A CodeBlue rep will call, text, or email you within 1 business hour.</p>
@@ -184,8 +184,85 @@ def rep_form():
     <button type="submit" class="btn btn-primary btn-block">Send &amp; Get a Callback</button>
   </form>
   <div class="form-confirm">A CodeBlue rep will call, text, or email you within 1 business hour. Prefer to talk now? Call {PHONE}.</div>
-  <p class="form-note">Want more detail before a rep calls? <a href="contact.html#full-form">Use the full form instead.</a></p>
+  <p class="form-note">Want more detail before a rep calls? <a href="{prefix}contact.html#full-form">Use the full form instead.</a></p>
 </div>"""
+
+def full_intake_form():
+    """Optional, longer pre-qualify form. Secondary to rep_form() by design
+    (per the audit: the old 10-field Formidable form is no longer the
+    default path, but stays available for prospects who want to self-qualify)."""
+    service_options = [label for label, _ in NAV_SOLUTIONS]
+    check_items = "\n".join(
+        f'          <label><input type="checkbox" name="services" value="{label}"> {label}</label>'
+        for label in service_options
+    )
+    return f"""<details class="full-form-toggle card reveal">
+  <summary>Prefer to fill out the full form?</summary>
+  <div class="full-form-body">
+    <p class="sub">Give us more detail up front and your rep will come prepared. This is optional, not required to get a callback.</p>
+    <form>
+      <div class="field">
+        <label for="ff-name">Name</label>
+        <input id="ff-name" type="text" required placeholder="Your name">
+      </div>
+      <div class="field">
+        <label for="ff-company">Company</label>
+        <input id="ff-company" type="text" placeholder="Business name">
+      </div>
+      <div class="field">
+        <label for="ff-phone">Phone</label>
+        <input id="ff-phone" type="tel" placeholder="(804) 000-0000">
+      </div>
+      <div class="field">
+        <label for="ff-email">Email</label>
+        <input id="ff-email" type="email" placeholder="you@company.com">
+      </div>
+      <div class="field">
+        <label for="ff-contact-method">Preferred contact method</label>
+        <select id="ff-contact-method">
+          <option>Phone call</option>
+          <option>Text</option>
+          <option>Email</option>
+          <option>No preference</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>What do you need help with? (check all that apply)</label>
+        <div class="check-grid">
+{check_items}
+        </div>
+      </div>
+      <div class="field">
+        <label for="ff-users">Approximate number of employees/users</label>
+        <input id="ff-users" type="text" placeholder="e.g. 25">
+      </div>
+      <div class="field">
+        <label for="ff-day">Best day to reach you</label>
+        <select id="ff-day">
+          <option>Any weekday</option>
+          <option>Monday</option>
+          <option>Tuesday</option>
+          <option>Wednesday</option>
+          <option>Thursday</option>
+          <option>Friday</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="ff-time">Best time to reach you</label>
+        <select id="ff-time">
+          <option>Morning</option>
+          <option>Afternoon</option>
+          <option>Evening</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="ff-notes">Anything else we should know?</label>
+        <input id="ff-notes" type="text" placeholder="Optional">
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Send full details</button>
+    </form>
+  </div>
+</details>"""
 
 def stat_strip():
     return """<div class="stat-strip">
@@ -265,7 +342,9 @@ def material_panel(icon="network", seed=0):
 </svg>"""
 
 def write(path, html):
-    with open(os.path.join(ROOT, path), "w") as f:
+    full = os.path.join(ROOT, path)
+    os.makedirs(os.path.dirname(full), exist_ok=True)
+    with open(full, "w") as f:
         f.write(html)
     print("wrote", path)
 
@@ -351,14 +430,14 @@ home = head(
       <h2>Built for the way your industry actually works</h2>
     </div>
     <div class="pill-row">
-      <a class="pill" href="industries.html">Healthcare</a>
-      <a class="pill" href="industries.html">Legal</a>
-      <a class="pill" href="industries.html">Financial Services</a>
-      <a class="pill" href="industries.html">Dental</a>
-      <a class="pill" href="industries.html">Automotive</a>
-      <a class="pill" href="industries.html">Government</a>
-      <a class="pill" href="industries.html">Hospitality</a>
-      <a class="pill" href="industries.html">Retail</a>
+      <a class="pill" href="industries/healthcare.html">Healthcare</a>
+      <a class="pill" href="industries/legal.html">Legal</a>
+      <a class="pill" href="industries/financial-services.html">Financial Services</a>
+      <a class="pill" href="industries/dental.html">Dental</a>
+      <a class="pill" href="industries/automotive.html">Automotive</a>
+      <a class="pill" href="industries/government.html">Government</a>
+      <a class="pill" href="industries/hospitality.html">Hospitality</a>
+      <a class="pill" href="industries/retail.html">Retail</a>
     </div>
   </div>
 </section>
@@ -442,8 +521,8 @@ managed_it = head(
     </div>
     <div class="bento" style="grid-template-columns:1fr 1fr 1fr;">
       <div class="card reveal">
-        <h3>Traction Forward</h3>
-        <p>As your managed IT care partner, CodeBlue identifies technical risks, addresses potential threats, and prevents costly disruptions within your technology infrastructure.</p>
+        <h3>Proactive Risk Management</h3>
+        <p>As your managed IT care partner, CodeBlue identifies technical risks, addresses potential threats, and prevents costly disruptions before they reach your team.</p>
       </div>
       <div class="card reveal">
         <h3>Peace of Mind</h3>
@@ -465,9 +544,9 @@ managed_it = head(
         <p>Managed IT can be priced per-device or per-person. Our PeopleFirst model covers every device a team member uses under one flat rate.</p>
         <a href="peoplefirst-support.html" class="btn btn-ghost">Explore PeopleFirst Support</a>
         <div class="pill-row" style="margin-top:22px;">
-          <a class="pill" href="industries.html">Healthcare</a>
-          <a class="pill" href="industries.html">Legal</a>
-          <a class="pill" href="industries.html">Financial Services</a>
+          <a class="pill" href="industries/healthcare.html">Healthcare</a>
+          <a class="pill" href="industries/legal.html">Legal</a>
+          <a class="pill" href="industries/financial-services.html">Financial Services</a>
         </div>
       </div>
       {rep_form()}
@@ -700,8 +779,10 @@ contact = head(
         <strong>Warsaw:</strong> <a href="tel:+18044564500">(804) 456-4500</a><br>
         <strong>Email:</strong> <a href="mailto:hello@codebluetechnology.com">hello@codebluetechnology.com</a><br>
         <strong>Service requests:</strong> <a href="mailto:service@codebluetechnology.com">service@codebluetechnology.com</a></p>
-        <p id="full-form" style="margin-top:20px;">Want to pre-qualify yourself with more detail before a rep calls? The full intake form is available as a secondary option. Ask your rep for the link, or we'll add a dedicated long-form page here.</p>
       </div>
+    </div>
+    <div id="full-form" style="max-width:900px; margin:20px auto 0;">
+      {full_intake_form()}
     </div>
   </div>
 </section>
@@ -831,6 +912,19 @@ data_center = head(
       <div class="split-media">
         {material_panel("building", 92)}
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="split reveal">
+      <div class="card">
+        <span class="label">Get a Hosting Quote</span>
+        <h3>Talk through your workload with a rep</h3>
+        <p>Tell us what you're hosting today and where it needs to go. We'll scope the right mix of virtual servers, hardware hosting, or disaster recovery.</p>
+      </div>
+      {rep_form()}
     </div>
   </div>
 </section>
@@ -1020,9 +1114,12 @@ premise_security = head(
 
 <section class="section" style="padding-top:0;">
   <div class="container">
-    <div class="card reveal" style="max-width:640px;">
-      <h3>Department of Criminal Justice Services licensed</h3>
-      <p>Hiring a DCJS-certified contractor ensures your security installation meets Virginia's regulated standards for safety, reliability, and compliance. CodeBlue Technology's DCJS ID is 11-16835.</p>
+    <div class="split reveal">
+      <div class="card">
+        <h3>Department of Criminal Justice Services licensed</h3>
+        <p>Hiring a DCJS-certified contractor ensures your security installation meets Virginia's regulated standards for safety, reliability, and compliance. CodeBlue Technology's DCJS ID is 11-16835.</p>
+      </div>
+      {rep_form()}
     </div>
   </div>
 </section>
@@ -1032,39 +1129,69 @@ write("premise-security.html", premise_security)
 
 # ---------------------------------------------------------------------------
 # INDUSTRIES
+# Each industry gets its own indexable page (industries/<slug>.html) with a
+# unique title/meta description, per the audit: anchor-only sections don't
+# get indexed or linked from Google Business Profile / paid campaigns, real
+# URLs do. industries.html stays as a teaser/overview linking out to each.
 # ---------------------------------------------------------------------------
 industries_data = [
-    ("Financial Services", "Technology Support for Financial Institutions",
-     "The financial services industry needs both operational efficiency and strict regulatory compliance. CodeBlue Technology delivers robust, secure, scalable IT so financial firms operate without disruption while meeting the standards regulators require.",
-     ["Data security and encryption for sensitive financial data", "Regulatory compliance management for SOX, GLBA, and PCI DSS", "24/7 monitoring and support", "Disaster recovery and business continuity planning"]),
-    ("Automotive &amp; Collision Repair", "IT Built for the Shop Floor",
-     "Automotive and collision repair shops depend on digital diagnostics, customer communication, and daily operations staying online. CodeBlue keeps telephony, imaging, wireless, and digital signage running so your team can focus on the work in front of them.",
-     ["Telephony solutions for reliable customer and supplier communication", "Imaging and diagnostics support for accurate workflow management", "Wireless network stability across the shop floor", "Digital signage management for customer engagement"]),
-    ("Healthcare", "Healthcare and Medical Workers Depend on IT",
-     "Hospitals and healthcare practices need IT that supports patient care, urgent response, and secure operations. CodeBlue optimizes systems for emergency coordination, secures patient data and facility access, and monitors sensitive areas with high-quality cameras.",
-     ["Telephony and communication systems for staff, patients, and emergency services", "Access control and data security for patient information", "Priority urgent response support", "Security cameras and monitoring"]),
-    ("Legal", "Legal Practice IT for Secure, Organized Operations",
-     "Law firms manage sensitive client data, case management software, and secure communication every day. CodeBlue protects confidential information, supports the software you already use, and manages server and cloud storage for critical documents.",
-     ["Secure data management and encryption for client files", "Case management software support", "Telephony and communication support for clients, courts, and colleagues", "Server and cloud storage for case histories"]),
-    ("Dental", "Dental Technology Support for Secure Patient Care",
-     "Dental practices depend on patient charting software, HIPAA-compliant records, and reliable phone systems running without interruption. CodeBlue supports the premise servers and dental-specific software your practice runs on.",
-     ["Patient charting software support", "Secure, HIPAA-compliant email and data storage", "Telephony and communication support", "Premise server and dental software maintenance"]),
-    ("Government", "State and Local Government Co-Managed IT",
-     "State and local governments manage complex systems, protect sensitive data, and communicate with citizens every day. CodeBlue supports citizen software systems, secure email and data storage, and technology procurement that fits public-sector budgets.",
-     ["Citizen software management", "Secure, compliant email and data storage", "Telephony and communication support", "Technology purchasing and procurement"]),
+    dict(slug="healthcare", name="Healthcare", icon="shield",
+         headline="Healthcare and Medical Workers Depend on IT",
+         meta="DCJS-licensed camera systems, secure patient data, and priority urgent-response IT support for healthcare and medical practices in Central Virginia.",
+         body="Hospitals and healthcare practices need IT that supports patient care, urgent response, and secure operations. CodeBlue optimizes systems for emergency coordination, secures patient data and facility access, and monitors sensitive areas with high-quality cameras.",
+         bullets=["Telephony and communication systems for staff, patients, and emergency services", "Access control and data security for patient information", "Priority urgent response support", "Security cameras and monitoring"]),
+    dict(slug="legal", name="Legal", icon="building",
+         headline="Legal Practice IT for Secure, Organized Operations",
+         meta="Secure data management, case management software support, and confidential document storage for law firms across Central Virginia.",
+         body="Law firms manage sensitive client data, case management software, and secure communication every day. CodeBlue protects confidential information, supports the software you already use, and manages server and cloud storage for critical documents.",
+         bullets=["Secure data management and encryption for client files", "Case management software support", "Telephony and communication support for clients, courts, and colleagues", "Server and cloud storage for case histories"]),
+    dict(slug="financial-services", name="Financial Services", icon="shield",
+         headline="Technology Support for Financial Institutions",
+         meta="Regulatory compliance, encryption, and 24/7 monitoring for financial services firms in Central Virginia, built around SOX, GLBA, and PCI DSS.",
+         body="The financial services industry needs both operational efficiency and strict regulatory compliance. CodeBlue Technology delivers robust, secure, scalable IT so financial firms operate without disruption while meeting the standards regulators require.",
+         bullets=["Data security and encryption for sensitive financial data", "Regulatory compliance management for SOX, GLBA, and PCI DSS", "24/7 monitoring and support", "Disaster recovery and business continuity planning"]),
+    dict(slug="dental", name="Dental", icon="shield",
+         headline="Dental Technology Support for Secure Patient Care",
+         meta="HIPAA-compliant records, patient charting software support, and premise server maintenance for dental practices in Central Virginia.",
+         body="Dental practices depend on patient charting software, HIPAA-compliant records, and reliable phone systems running without interruption. CodeBlue supports the premise servers and dental-specific software your practice runs on.",
+         bullets=["Patient charting software support", "Secure, HIPAA-compliant email and data storage", "Telephony and communication support", "Premise server and dental software maintenance"]),
+    dict(slug="automotive", name="Automotive &amp; Collision Repair", icon="network",
+         headline="IT Built for the Shop Floor",
+         meta="Telephony, imaging and diagnostics support, and wireless network stability for automotive and collision repair shops in Central Virginia.",
+         body="Automotive and collision repair shops depend on digital diagnostics, customer communication, and daily operations staying online. CodeBlue keeps telephony, imaging, wireless, and digital signage running so your team can focus on the work in front of them.",
+         bullets=["Telephony solutions for reliable customer and supplier communication", "Imaging and diagnostics support for accurate workflow management", "Wireless network stability across the shop floor", "Digital signage management for customer engagement"]),
+    dict(slug="government", name="Government", icon="building",
+         headline="State and Local Government Co-Managed IT",
+         meta="Citizen software management, secure data storage, and technology procurement built for public-sector budgets in Central Virginia.",
+         body="State and local governments manage complex systems, protect sensitive data, and communicate with citizens every day. CodeBlue supports citizen software systems, secure email and data storage, and technology procurement that fits public-sector budgets.",
+         bullets=["Citizen software management", "Secure, compliant email and data storage", "Telephony and communication support", "Technology purchasing and procurement"]),
+    dict(slug="hospitality", name="Hospitality", icon="people",
+         headline="IT That Keeps Guests Connected and Staff Moving",
+         meta="Guest WiFi, POS and reservation system support, and PCI-compliant payment security for hotels, restaurants, and venues in Central Virginia.",
+         body="Hotels, restaurants, and venues run on guest WiFi, point-of-sale systems, and reservation software that can't go down during a shift. CodeBlue keeps hospitality technology online and secure across every location, from the front desk to the kitchen.",
+         bullets=["Guest WiFi design and management", "Point-of-sale and reservation system support", "PCI-compliant payment network security", "Multi-location support with consistent uptime"]),
+    dict(slug="retail", name="Retail", icon="network",
+         headline="Retail Technology That Keeps the Register Running",
+         meta="Point-of-sale and inventory system support, PCI DSS compliant payment networks, and loss-prevention camera systems for retail businesses.",
+         body="Retail businesses depend on point-of-sale systems, inventory software, and payment processing staying online through every sale. CodeBlue supports the technology behind the counter so downtime doesn't cost you customers.",
+         bullets=["Point-of-sale and inventory system support", "PCI DSS compliant payment network security", "Multi-location network management", "Surveillance and loss prevention camera systems"]),
 ]
-industry_cards = "\n".join(f"""    <div class="card reveal" style="margin-bottom:20px;">
-      <span class="label">{name}</span>
-      <h3>{headline}</h3>
-      <p>{body}</p>
-      <ul>
-        {"".join(f"<li>{b}</li>" for b in bullets)}
-      </ul>
-    </div>""" for name, headline, body, bullets in industries_data)
+industries_by_slug = {d["slug"]: d for d in industries_data}
+
+def industry_href(slug):
+    return f"industries/{slug}.html"
+
+# ---- Overview page: teaser cards linking out to each real, indexable page ----
+industry_teaser_cards = "\n".join(f"""      <div class="card reveal">
+        <span class="label">{d['name']}</span>
+        <h3>{d['headline']}</h3>
+        <p>{d['body']}</p>
+        <a href="{industry_href(d['slug'])}" class="btn btn-ghost" style="margin-top:12px;">See {d['name']} IT support</a>
+      </div>""" for d in industries_data)
 
 industries = head(
     "Industries We Serve | CodeBlue Technology",
-    "CodeBlue Technology serves financial services, automotive, healthcare, legal, dental, and government organizations across Central Virginia."
+    "CodeBlue Technology serves healthcare, legal, financial services, dental, automotive, government, hospitality, and retail organizations across Central Virginia."
 ) + header("industries.html") + f"""
 <main id="main">
 {hero(
@@ -1077,7 +1204,9 @@ industries = head(
 {stat_strip()}
 <section class="section">
   <div class="container">
-{industry_cards}
+    <div class="bento" style="grid-template-columns:1fr 1fr;">
+{industry_teaser_cards}
+    </div>
   </div>
 </section>
 <section class="section" style="padding-top:0;">
@@ -1094,6 +1223,69 @@ industries = head(
 </main>
 """ + footer()
 write("industries.html", industries)
+
+# ---- One real, indexable page per industry ----
+for d in industries_data:
+    other_industries = [o for o in industries_data if o["slug"] != d["slug"]][:3]
+    related_pills = "\n".join(
+        f'      <a class="pill" href="{o["slug"]}.html">{o["name"]}</a>' for o in other_industries
+    )
+    page = head(
+        f"{d['name']} IT Support in Richmond, VA | CodeBlue Technology",
+        d["meta"],
+        prefix="../",
+    ) + header("industries.html", prefix="../") + f"""
+<main id="main">
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="label">Industries &rsaquo; {d['name']}</span>
+          <h1>{d['headline']}</h1>
+          <p class="lead">{d['body']}</p>
+          <div class="hero-ctas"><a href="../contact.html" class="btn btn-primary">Talk to a Rep</a><a href="../industries.html" class="btn btn-ghost">See all industries</a></div>
+        </div>
+        <div class="hero-media">
+          {material_panel(d['icon'], sum(ord(c) for c in d['slug']) % 90)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{stat_strip()}
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div class="brand-rule"></div>
+      <h2>What {d['name'].replace('&amp;', '&')} businesses get from CodeBlue</h2>
+    </div>
+    <div class="bento">
+      {"".join(f'<div class="tile b-md reveal"><span class="icon">{i+1:02d}</span><p>{b}</p></div>' for i, b in enumerate(d['bullets']))}
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="split reveal">
+      <div>
+        <span class="label">Talk to a specialist</span>
+        <h2>Get IT support built around your industry</h2>
+        <p>Tell us about your business and a CodeBlue rep will follow up within 1 business hour with next steps specific to {d['name'].replace('&amp;', '&')}.</p>
+        <div class="pill-row" style="margin-top:22px;">
+{related_pills}
+        </div>
+      </div>
+      {rep_form(prefix="../")}
+    </div>
+  </div>
+</section>
+</main>
+""" + footer(prefix="../")
+    write(industry_href(d["slug"]), page)
 
 # ---------------------------------------------------------------------------
 # RESOURCES
