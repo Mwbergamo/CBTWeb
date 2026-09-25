@@ -278,9 +278,10 @@ def stat_strip():
 
 _panel_seed = [0]
 
-def hero(eyebrow, h1, lead, ctas, icon="network"):
+def hero(eyebrow, h1, lead, ctas, icon="network", media=None):
     eyebrow_html = f'<span class="label">{eyebrow}</span>' if eyebrow else ""
     _panel_seed[0] += 1
+    media_html = media if media is not None else material_panel(icon, _panel_seed[0])
     return f"""<section class="hero">
   <div class="container">
     <div class="hero-inner">
@@ -292,7 +293,7 @@ def hero(eyebrow, h1, lead, ctas, icon="network"):
           <div class="hero-ctas">{ctas}</div>
         </div>
         <div class="hero-media">
-          {material_panel(icon, _panel_seed[0])}
+          {media_html}
         </div>
       </div>
     </div>
@@ -340,6 +341,16 @@ def material_panel(icon="network", seed=0):
     {icon_paths}
   </g>
 </svg>"""
+
+def photo_fill(src, alt, prefix=""):
+    """A real photo that fully replaces a hero/split panel. Container must be
+    position:relative (hero-media and split-media both are)."""
+    return f'<img class="photo-fill" src="{prefix}{src}" alt="{alt}" loading="lazy">'
+
+def photo_overlay(src, alt, prefix=""):
+    """A photo with transparency layered on top of a material_panel() backdrop,
+    e.g. a real product screenshot composite over the brand gradient."""
+    return f'<img class="photo-overlay" src="{prefix}{src}" alt="{alt}" loading="lazy">'
 
 def write(path, html):
     full = os.path.join(ROOT, path)
@@ -417,7 +428,7 @@ home = head(
         <a href="peoplefirst-support.html" class="btn btn-ghost">How PeopleFirst works</a>
       </div>
       <div class="split-media">
-        {material_panel("people", 90)}
+        {photo_fill("images/office-reading-nook.jpg", "A CodeBlue Technology team member working in the office")}
       </div>
     </div>
   </div>
@@ -674,6 +685,7 @@ about = head(
     "Founded in 2003 and based in Richmond, VA, CodeBlue Technology has grown alongside the businesses we serve, now supporting 550+ active clients across Richmond and the Northern Neck.",
     "",
     "building",
+    media=photo_fill("images/office-open-floor.jpg", "Inside the CodeBlue Technology office in Mechanicsville, VA"),
 )}
 
 {stat_strip()}
@@ -692,7 +704,7 @@ about = head(
   <div class="container">
     <div class="split reveal">
       <div class="split-media">
-        {material_panel("people", 94)}
+        {photo_fill("images/office-glass-offices.jpg", "CodeBlue Technology office space")}
       </div>
       <div>
         <span class="label">Founder & CEO</span>
@@ -867,6 +879,7 @@ data_center = head(
     "CodeBlue Technology hosts dedicated, compliant, highly resilient server environments, matched to your workload and backed by a local team you can actually call.",
     '<a href="contact.html" class="btn btn-primary">Talk to a Rep</a><a href="data-cabling.html" class="btn btn-ghost">See data cabling</a>',
     "building",
+    media=photo_fill("images/data-center.jpg", "Server racks inside CodeBlue Technology's private data center"),
 )}
 
 {stat_strip()}
@@ -959,6 +972,7 @@ voip = head(
     "CodeBlue's voice platform has empowered businesses since 2003, on-premise, in the cloud, or both, with the features your team actually uses every day.",
     '<a href="contact.html" class="btn btn-primary">Talk to a Rep</a><a href="#demo" class="btn btn-ghost">Request a demo</a>',
     "network",
+    media=material_panel("network", 701) + photo_overlay("images/voip-devices.png", "CodeBlue's voice platform running on desktop, laptop, tablet, and desk phone"),
 )}
 
 {stat_strip()}

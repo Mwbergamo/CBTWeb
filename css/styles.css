@@ -451,3 +451,8 @@ button { font-family: inherit; cursor: pointer; }
 /* ---- Material panel (brushed aluminum / frosted glass, brand accent strip) ---- */
 .material-panel { width: 100%; height: 100%; display: block; }
 
+/* ---- Real photography, layered into the same hero/split panels ---- */
+.photo-fill { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-overlay { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 28px; }
+@media (max-width: 940px) { .photo-overlay { padding: 14px; } }
+
