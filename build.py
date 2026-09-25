@@ -42,6 +42,7 @@ def head(title, description, prefix=""):
 <title>{title}</title>
 <meta name="description" content="{description}">
 <link rel="stylesheet" href="{prefix}css/styles.css">
+<link rel="icon" type="image/png" href="{prefix}images/icon-pulse-solid.png">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{description}">
 <meta property="og:type" content="website">
@@ -75,7 +76,7 @@ def header(active="", prefix=""):
     return f"""<a href="#main" class="visually-hidden">Skip to content</a>
 <header class="site-header">
   <div class="container">
-    <a href="{prefix}index.html" class="brand"><span class="mark"></span> CodeBlue Technology</a>
+    <a href="{prefix}index.html" class="brand"><img class="brand-logo" src="{prefix}images/logo-codeblue.png" alt="CodeBlue Technology"></a>
     <nav class="nav-desktop" aria-label="Primary">
       <div class="nav-item has-mega">
         <a class="nav-link" href="{prefix}managed-it.html">Solutions</a>
@@ -109,7 +110,7 @@ def footer(prefix=""):
   <div class="container">
     <div class="footer-grid">
       <div>
-        <h4>CodeBlue Technology</h4>
+        <div class="footer-brand"><img src="{prefix}images/icon-pulse-outline.png" alt="" width="22" height="22" loading="lazy"> <h4>CodeBlue Technology</h4></div>
         <p style="color:rgba(246,245,242,0.62); max-width:34ch;">Founded 2003 in Richmond, VA. 550+ active clients across Central Virginia and the Northern Neck. Managed IT, cyber security, data cabling, VoIP, and premise security. Support that follows your team, not your equipment.</p>
         <div class="footer-social">
           <a href="#">Facebook</a><a href="#">LinkedIn</a><a href="#">Instagram</a><a href="#">Podcast</a>
