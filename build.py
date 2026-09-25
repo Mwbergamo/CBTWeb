@@ -353,12 +353,337 @@ def photo_overlay(src, alt, prefix=""):
     e.g. a real product screenshot composite over the brand gradient."""
     return f'<img class="photo-overlay" src="{prefix}{src}" alt="{alt}" loading="lazy">'
 
+SITE_URL = "https://www.codebluetechnology.com"
+_written_pages = []
+
 def write(path, html):
     full = os.path.join(ROOT, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, "w") as f:
         f.write(html)
+    if path.endswith(".html"):
+        _written_pages.append(path)
     print("wrote", path)
+
+def write_sitemap():
+    """Every generated page, so search engines can find the new indexable
+    service pages without waiting on internal link crawling alone."""
+    urls = []
+    for path in sorted(_written_pages):
+        loc = path if path != "index.html" else ""
+        priority = "1.0" if path == "index.html" else ("0.8" if path.count("/") == 0 else "0.6")
+        urls.append(f"  <url><loc>{SITE_URL}/{loc}</loc><priority>{priority}</priority></url>")
+    xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+           + "\n".join(urls) + "\n</urlset>\n")
+    with open(os.path.join(ROOT, "sitemap.xml"), "w") as f:
+        f.write(xml)
+    print("wrote sitemap.xml (", len(urls), "pages )")
+    robots = f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n"
+    with open(os.path.join(ROOT, "robots.txt"), "w") as f:
+        f.write(robots)
+    print("wrote robots.txt")
+
+# ---------------------------------------------------------------------------
+# SUB-SERVICE PAGES
+# Real, indexable pages for the specific service terms prospects search for
+# (see the CodeBlue 2025-26 Customer Service Offerings deck). One page per
+# term, filed under its parent solution's own folder, cross-linked back to
+# the parent page and its sibling services. build_subservices() writes every
+# page for a category and returns a pill-row of links to embed back on the
+# parent solution page, so linking runs both directions.
+# ---------------------------------------------------------------------------
+def subservice_href(parent_slug, slug):
+    return f"{parent_slug}/{slug}.html"
+
+def build_subservices(parent_slug, parent_label, parent_page, default_icon, items):
+    for d in items:
+        siblings = [o for o in items if o["slug"] != d["slug"]][:3]
+        related_pills = "\n".join(
+            f'      <a class="pill" href="{o["slug"]}.html">{o["name"]}</a>' for o in siblings
+        )
+        page = head(
+            f"{d['name']} in Richmond, VA | CodeBlue Technology",
+            d["meta"],
+            prefix="../",
+        ) + header(parent_page, prefix="../") + f"""
+<main id="main">
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="label">{parent_label} &rsaquo; {d['name']}</span>
+          <h1>{d['headline']}</h1>
+          <p class="lead">{d['body']}</p>
+          <div class="hero-ctas"><a href="../contact.html" class="btn btn-primary">Talk to a Rep</a><a href="../{parent_page}" class="btn btn-ghost">See all {parent_label}</a></div>
+        </div>
+        <div class="hero-media">
+          {material_panel(d.get('icon', default_icon), sum(ord(c) for c in d['slug']) % 90)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{stat_strip()}
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div class="brand-rule"></div>
+      <h2>What's included</h2>
+    </div>
+    <div class="bento">
+      {"".join(f'<div class="tile b-md reveal"><span class="icon">{i+1:02d}</span><p>{b}</p></div>' for i, b in enumerate(d['bullets']))}
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="split reveal">
+      <div>
+        <span class="label">Talk to a specialist</span>
+        <h2>Talk to a rep about {d['name']}</h2>
+        <p>Tell us about your business and a CodeBlue rep will follow up within 1 business hour with next steps for {d['name']}.</p>
+        <div class="pill-row" style="margin-top:22px;">
+{related_pills}
+        </div>
+      </div>
+      {rep_form(prefix="../")}
+    </div>
+  </div>
+</section>
+</main>
+""" + footer(prefix="../")
+        write(subservice_href(parent_slug, d["slug"]), page)
+
+    return "\n".join(f'      <a class="pill" href="{parent_slug}/{d["slug"]}.html">{d["name"]}</a>' for d in items)
+
+managed_it_subservices = [
+    dict(slug="monitoring-reporting", name="Monthly Monitoring &amp; Reporting", icon="building",
+         headline="Know Exactly How Your Network Is Performing, Every Month",
+         meta="Inventory and health monitoring with clear monthly reporting, so you always know the state of your network. Managed IT from CodeBlue Technology.",
+         body="Every managed device reports its health back to CodeBlue around the clock. We turn that data into a monthly report your team can actually use: what's running well, what needs attention, and what's coming due.",
+         bullets=["Full inventory of every managed device on your network", "Ongoing health monitoring for servers, workstations, and network gear", "Monthly reports built for business owners, not just IT staff", "Early warning on failing hardware before it becomes downtime"]),
+    dict(slug="vcio-services", name="vCIO Services", icon="people",
+         headline="A Virtual CIO Who Actually Knows Your Business",
+         meta="vCIO advisory services from CodeBlue Technology: budget planning, technology roadmaps, and strategic guidance for growing businesses in Central Virginia.",
+         body="A vCIO gives you the strategic side of IT without a full-time executive salary. Your CodeBlue advisory team reviews your technology roadmap, plans budgets, and makes sure your IT spend lines up with where your business is headed.",
+         bullets=["Quarterly business reviews covering budget, risk, and roadmap", "Technology planning aligned to your growth goals", "Vendor and contract guidance from a team that knows the market", "A named advisor who knows your business, not a ticket queue"]),
+    dict(slug="service-level-agreements", name="Service Level Agreements &amp; Ticket Reporting", icon="building",
+         headline="Response Times You Can See, Not Just Promises",
+         meta="Transparent SLA tracking and ticket statistics from CodeBlue Technology, the response and resolution metrics RFPs and new clients ask for.",
+         body="Every RFP and new client engagement asks how we track service levels. CodeBlue documents response and resolution times against defined SLAs and makes that reporting available, so you always know how support is performing.",
+         bullets=["Defined response and resolution targets by issue severity", "Ticket statistics available on request or on a regular cadence", "Escalation paths for anything outside normal SLA windows", "The same tracking we show in every RFP response"]),
+    dict(slug="vendor-management", name="Vendor Management", icon="people",
+         headline="One Call Instead of Five, When Something Goes Wrong",
+         meta="CodeBlue Technology manages your technology vendor relationships, internet providers, software publishers, and hardware manufacturers, standalone or bundled with managed IT.",
+         body="Most businesses juggle a handful of technology vendors: internet providers, software publishers, line-of-business app support, hardware manufacturers. CodeBlue becomes the single point of contact, opening tickets and chasing resolution on your behalf.",
+         bullets=["A single point of contact for every technology vendor you use", "Ticket opening, escalation, and follow-through on your behalf", "Contract and renewal tracking across every vendor relationship", "Available standalone or bundled inside a managed IT plan"]),
+    dict(slug="project-management", name="IT Project Management", icon="building",
+         headline="Coordinated Hardware, Engineering, and Timelines",
+         meta="IT project management from CodeBlue Technology: coordinated resources, hardware, and engineering to deliver technology projects on schedule.",
+         body="New offices, system migrations, and technology rollouts need more than a single technician. CodeBlue coordinates hardware, engineering resources, and vendor timelines so your project lands on schedule and on budget.",
+         bullets=["Dedicated project manager for hardware and engineering resources", "Coordinated timelines across CodeBlue teams and outside vendors", "Clear milestones and status updates through project completion", "Available for office moves, migrations, and full technology rollouts"]),
+    dict(slug="renewals-management", name="Renewals Management", icon="building",
+         headline="Nothing Lapses Because Nobody Was Watching",
+         meta="CodeBlue Technology tracks and manages your renewable technology services by age, coverage, viability, and support, so nothing lapses unexpectedly.",
+         body="Warranties, licenses, domains, certificates, and support contracts all expire on their own schedules. CodeBlue tracks every renewable service your business depends on and flags what's coming due before it becomes a problem.",
+         bullets=["Centralized tracking of every renewable technology service", "Renewal timing weighed against age, coverage, and viability", "Advance notice before anything lapses or loses support", "One less set of dates your team has to remember"]),
+    dict(slug="onboarding-offboarding", name="Employee On/Offboarding", icon="people",
+         headline="New Hires Ready on Day One, Departures Locked Down Same Day",
+         meta="CodeBlue Technology manages IT onboarding and offboarding for employees: account provisioning, access changes, and equipment tracking.",
+         body="Employee turnover creates IT work: new accounts, hardware setup, and access changes on the way in, and locked-down access on the way out. CodeBlue tracks and executes both, with change management your HR team can rely on.",
+         bullets=["New-hire account provisioning and equipment setup before day one", "Access and permission changes tracked through every role change", "Same-day access removal when an employee departs", "Documented change history for compliance and audits"]),
+    dict(slug="asset-management", name="IT Asset &amp; Hardware Health Management", icon="building",
+         headline="Every Device Tracked, From Purchase to Retirement",
+         meta="IT asset management and hardware health monitoring from CodeBlue Technology: lifecycle tracking, inventory, and proactive maintenance for every device.",
+         body="CodeBlue tracks every managed device through its full lifecycle: purchase, deployment, maintenance, and retirement, with ongoing hardware asset monitoring that reports on inventory and health before failures cause downtime.",
+         bullets=["Full inventory and lifecycle tracking for every managed device", "Hardware asset monitoring with proactive health and inventory reporting", "Replacement planning ahead of end-of-life or warranty expiration", "Support and lifecycle maintenance handled in one program"]),
+    dict(slug="mobile-device-management", name="Mobile Device Management", icon="network",
+         headline="Every Phone, Tablet, and Laptop, One Pane of Glass",
+         meta="Mobile Device Management from CodeBlue Technology: remote access, security, and control across iOS, Android, Mac, and PC devices.",
+         body="Remote and hybrid teams need device security that doesn't depend on the device being in the building. CodeBlue's MDM platform manages iOS, Android, Mac, and PC devices from a single console, wherever your team is working.",
+         bullets=["Remote management for iOS, Android, Mac, and PC devices", "Enforced security policies and encryption across every device", "Remote lock and wipe for lost or stolen hardware", "A single pane of glass for your entire device fleet"]),
+    dict(slug="equipment-as-a-service", name="Equipment as a Service", icon="building",
+         headline="Hardware and Software, Turned Into One Predictable Bill",
+         meta="Equipment as a Service from CodeBlue Technology: hardware and software provided, maintained, and refreshed as a service, no capital purchase required.",
+         body="Provided equipment turns hardware and software into a service instead of a capital purchase. CodeBlue supplies, maintains, and refreshes the equipment your team uses, so you never have to think about it again.",
+         bullets=["Hardware and software provided and maintained as a service", "Predictable monthly cost instead of large capital purchases", "Lifecycle refresh built into the program", "One vendor responsible for the equipment end to end"]),
+    dict(slug="help-desk-support", name="Help Desk Support", icon="people",
+         headline="A Friendly, Local Voice When Something Breaks",
+         meta="Friendly, local help desk support from CodeBlue Technology for business and home users, call-in support with real response times.",
+         body="When something breaks, your team needs a real person who picks up. CodeBlue's help desk provides friendly, local, call-in support for business and home users alike, backed by the same team that manages your network.",
+         bullets=["Local call-in support, not an overseas call center", "Support for business and home users", "Backed by the same team managing your infrastructure", "Tracked against defined response time SLAs"]),
+    dict(slug="on-site-support", name="On-Site Technical Support", icon="building",
+         headline="Boots on the Ground When Remote Isn't Enough",
+         meta="On-site technical support from CodeBlue Technology for businesses across Central Virginia, dispatched when an issue needs a hands-on fix.",
+         body="Some issues need hands on the hardware. CodeBlue dispatches on-site technicians across Central Virginia for the fixes remote support can't reach, coordinated through the same help desk that handles your tickets.",
+         bullets=["Local technicians dispatched across Central Virginia", "Coordinated through the same ticketing system as remote support", "Available standalone or bundled with a managed IT plan", "Fast response for issues remote tools can't resolve"]),
+    dict(slug="equipment-sales", name="IT Equipment Sales", icon="network",
+         headline="The Right Hardware, Sourced and Configured for Your Environment",
+         meta="IT equipment sales from CodeBlue Technology: workstations, servers, and networking hardware sourced, configured, and deployed for your business.",
+         body="CodeBlue sources and configures the hardware your business runs on: workstations, servers, and networking equipment, matched to what your environment actually needs instead of whatever's in stock elsewhere.",
+         bullets=["Workstations, servers, and networking hardware, sourced and configured", "Recommendations matched to your existing environment", "Deployment and setup included, not just a box on a truck", "Backed by the team that will support it afterward"]),
+    dict(slug="power-protection", name="Power Protection", icon="building",
+         headline="Keep Running Through a Power Blip, Shut Down Safely Through an Outage",
+         meta="Power protection and UPS solutions from CodeBlue Technology, keeping servers and network gear online through surges, sags, and outages.",
+         body="A single power event can cost more in downtime and hardware damage than years of protection would have. CodeBlue sizes and installs UPS and surge protection for the servers and network gear your business depends on.",
+         bullets=["UPS sizing matched to your server and network load", "Surge protection for critical infrastructure", "Safe, automated shutdown during extended outages", "Battery health monitored as part of ongoing maintenance"]),
+    dict(slug="licensing-management", name="Software Licensing Management", icon="building",
+         headline="Compliant Licensing, Tracked So You Never Overpay or Underbuy",
+         meta="Software licensing management from CodeBlue Technology: tracked, compliant, and right-sized licensing across your Microsoft and third-party software.",
+         body="Under-licensed software creates compliance risk. Over-licensed software wastes budget. CodeBlue tracks your Microsoft 365 and third-party software licensing so you're always compliant and never paying for seats you don't use.",
+         bullets=["Centralized tracking across Microsoft and third-party licensing", "Compliance monitoring to avoid audit risk", "Right-sized seat counts as your team grows or shrinks", "Renewal timing coordinated with your budget cycle"]),
+    dict(slug="fully-managed-users", name="Fully Managed Users", icon="people",
+         headline="Every Device a Person Touches, Covered Under One Flat Rate",
+         meta="Fully managed user support from CodeBlue Technology: every device, vendor, and cyber tool a team member touches, covered under one flat per-person rate.",
+         body="A fully managed user gets every device they touch, every vendor they rely on, and every cyber security tool they need covered under a single flat rate. It's the model behind CodeBlue's PeopleFirst Support program.",
+         bullets=["One flat rate per person, not per device", "Every device a team member uses is covered", "Vendor support and cyber security tools included", "The foundation of CodeBlue's PeopleFirst Support program"]),
+]
+managed_it_subservice_pills = build_subservices("managed-it", "Managed IT", "managed-it.html", "building", managed_it_subservices)
+
+cyber_security_subservices = [
+    dict(slug="risk-assessments", name="Risk Assessments", icon="shield",
+         headline="See Your Network the Way an Attacker Would",
+         meta="Free network risk assessments from CodeBlue Technology: a clear report on vulnerabilities and remediation steps, no obligation.",
+         body="Every engagement starts with a clear picture of where you stand. CodeBlue's risk assessments scan your network for vulnerabilities and produce a plain-language report with remediation steps, whether or not you become a client.",
+         bullets=["Full network vulnerability scan and risk scoring", "Plain-language report, not a wall of technical jargon", "Prioritized remediation steps ranked by risk", "Free and no-obligation, for prospective and existing clients"]),
+    dict(slug="data-backup", name="Data Backup", icon="shield",
+         headline="Your Data, Backed Up Wherever It Actually Lives",
+         meta="Modern data backup from CodeBlue Technology: cloud, on-premise, and hybrid data discovered and backed up wherever it lives.",
+         body="Business data doesn't stay in one place anymore. CodeBlue finds where your data actually lives, cloud apps, on-premise servers, and endpoints, and backs it up with a modern approach built for how businesses actually work today.",
+         bullets=["Data discovery across cloud, on-premise, and endpoint sources", "Automated, monitored backup schedules", "Cloud-to-cloud backup for Microsoft 365 and Google Workspace", "Tested recovery, not just a backup that's never been restored"]),
+]
+cyber_security_subservice_pills = build_subservices("cyber-security", "Cyber Security", "cyber-security.html", "shield", cyber_security_subservices)
+
+data_center_subservices = [
+    dict(slug="colocation", name="Colocation Services", icon="building",
+         headline="Your Hardware, Hosted in Richmond's Largest Private Data Center",
+         meta="Colocation services from CodeBlue Technology: rack, half-rack, and full-rack hosting with power redundancy and geographic diversity.",
+         body="Colocation puts your own servers and phone systems in a facility built for uptime, without the cost of building it yourself. CodeBlue offers rack, half-rack, and full-rack hosting with redundant power and network diversity.",
+         bullets=["Rack, half-rack, and full-rack hosting options", "Redundant power and geographic diversity for failover", "On-net with Comcast, Verizon, Level 3, Segra, and more", "SOC II compliant facility with 24/7 monitoring"]),
+    dict(slug="private-cloud", name="Private Cloud Hosting", icon="building",
+         headline="Cloud Stability Without the Public Cloud Surprises",
+         meta="Private cloud hosting from CodeBlue Technology: dedicated, resilient server environments without the pricing changes and cancellations of public cloud.",
+         body="Private cloud hosting avoids the unexpected price changes and program cancellations that come with public cloud services. CodeBlue's private cloud gives you dedicated, resilient server environments with costs and access that stay consistent.",
+         bullets=["Dedicated server environments, not shared multi-tenant resources", "Predictable pricing without surprise increases", "Maintenance, OS updates, and backup included", "A local team you can actually call"]),
+    dict(slug="public-cloud", name="Public Cloud Solutions", icon="network",
+         headline="Public Cloud, Sourced and Managed the Right Way",
+         meta="Public cloud sourcing and management from CodeBlue Technology, matching workloads to the right public cloud platform and keeping costs under control.",
+         body="Public cloud makes sense for some workloads and not others. CodeBlue helps you source, configure, and manage the right public cloud platform for what you're running, and keeps an eye on costs so they don't creep up on you.",
+         bullets=["Workload assessment to match the right platform", "Sourcing and configuration for major public cloud platforms", "Ongoing cost monitoring and optimization", "Hybrid setups combining public and private cloud"]),
+    dict(slug="internet-sourcing", name="Internet Services Sourcing", icon="network",
+         headline="The Right Internet Circuit, Without the Vendor Runaround",
+         meta="Internet services sourcing from CodeBlue Technology, comparing carriers and circuit types to find the right connectivity for your business.",
+         body="Choosing an internet provider means comparing carriers, circuit types, and contract terms most business owners don't deal with every day. CodeBlue sources and manages the right connectivity for your location and workload.",
+         bullets=["Carrier and circuit comparison across major providers", "Redundant circuits for businesses that can't go offline", "Contract negotiation on your behalf", "Ongoing vendor management after installation"]),
+    dict(slug="disaster-recovery", name="Failover &amp; Disaster Recovery", icon="shield",
+         headline="A Plan for the Day Something Actually Goes Down",
+         meta="Failover and disaster recovery from CodeBlue Technology: RTO and RPO designed around your workflow, backed by a SOC II compliant data center.",
+         body="Disaster recovery is only useful if it's designed around how your business actually works. CodeBlue builds recovery time and recovery point objectives around your workflow, backed by geographically diverse, SOC II compliant infrastructure.",
+         bullets=["RTO and RPO designed around your specific workflow", "Geographic diversity for true failover, not just backup", "Regular testing so recovery works when you need it", "SOC II compliant infrastructure behind every plan"]),
+    dict(slug="compliance", name="Privacy &amp; Compliance", icon="shield",
+         headline="Infrastructure Built to Pass an Audit",
+         meta="Privacy and compliance hosting from CodeBlue Technology, SOC II audited data centers and cloud offerings for regulated industries.",
+         body="Regulated businesses need infrastructure that can survive an audit, not just a sales pitch. CodeBlue's data centers and cloud offerings are SOC II compliant and audited against the standards your industry actually requires.",
+         bullets=["SOC II compliant data centers and cloud infrastructure", "Documentation ready for auditors and regulators", "Support for HIPAA, PCI DSS, and other industry frameworks", "Regular audits, not a one-time certification"]),
+]
+data_center_subservice_pills = build_subservices("data-center", "Cloud &amp; Data Center Hosting", "data-center.html", "building", data_center_subservices)
+
+voip_subservices = [
+    dict(slug="cloud-voice", name="Cloud Voice Systems", icon="network",
+         headline="Your Phone System, Hosted and Always Up to Date",
+         meta="Cloud voice systems from CodeBlue Technology: hosted phone service with the features growing teams actually use, no on-site hardware required.",
+         body="Cloud voice moves your phone system off a closet server and onto a platform CodeBlue hosts and maintains. Your team gets the same features as an on-premise system, find/follow me, visual voicemail, chat, without the hardware to manage.",
+         bullets=["Hosted, always-updated phone platform, no on-site server", "Find/follow me, visual voicemail, and secure chat included", "Scales up or down as your headcount changes", "HIPAA compliant voice available for healthcare practices"]),
+    dict(slug="premise-voice", name="Premise Voice Systems", icon="building",
+         headline="On-Site Phone Systems, Installed and Supported",
+         meta="Premise voice systems from CodeBlue Technology: on-site phone hardware installed, configured, and supported for businesses that want it in-house.",
+         body="Some businesses want their phone system on-site. CodeBlue installs, configures, and supports premise-based voice systems, and can migrate you to the cloud later without rebuilding the whole system from scratch.",
+         bullets=["On-site phone system installation and configuration", "Local support from the team that installed it", "Future migration path to cloud voice without a rebuild", "Integration with existing data cabling and network infrastructure"]),
+    dict(slug="sip-trunking", name="SIP Voice Services", icon="network",
+         headline="SIP Trunking That Just Works With What You Have",
+         meta="SIP trunking and SIP voice services from CodeBlue Technology, connecting your existing PBX to modern, cost-effective voice service.",
+         body="SIP trunking connects your existing phone system to modern voice service over your internet connection, often at a lower cost than traditional phone lines. CodeBlue sizes, provisions, and supports SIP trunks for businesses of any size.",
+         bullets=["SIP trunks sized to your existing PBX and call volume", "Lower cost than traditional analog phone lines", "Redundant trunking for businesses that can't drop calls", "Full provisioning and ongoing support included"]),
+    dict(slug="call-center", name="Call Center Services", icon="people",
+         headline="Call Routing and Reporting Built for High-Volume Teams",
+         meta="Call center services from CodeBlue Technology: queues, routing, and reporting for businesses handling high call volume.",
+         body="High-volume call teams need more than a phone line, they need queues, routing rules, and reporting that shows what's actually happening. CodeBlue configures call center features on top of your voice platform so nothing gets lost.",
+         bullets=["Call queuing and skills-based routing", "Real-time and historical call reporting", "Configurable hold, hunt group, and overflow rules", "Built on the same platform as the rest of your voice system"]),
+    dict(slug="phone-hardware", name="Phone Hardware Solutions", icon="network",
+         headline="Desk Phones and Headsets, Sourced and Provisioned",
+         meta="Phone hardware solutions from CodeBlue Technology: desk phones, headsets, and conference devices sourced, provisioned, and supported.",
+         body="CodeBlue sources and provisions the physical phones and headsets your team uses, matched to your voice platform and pre-configured so they work the moment they're plugged in.",
+         bullets=["Desk phones and headsets matched to your voice platform", "Pre-configured before they reach your team", "Bulk provisioning for multi-location deployments", "Ongoing replacement and support as hardware ages"]),
+    dict(slug="conference-room", name="Conference Room Solutions", icon="building",
+         headline="Meeting Rooms That Actually Start on Time",
+         meta="Conference room solutions from CodeBlue Technology: video, audio, and voice integration for meeting spaces that just work.",
+         body="Nothing wastes a meeting faster than technology that doesn't work. CodeBlue designs and installs conference room audio, video, and voice integration so your meetings start on time, every time.",
+         bullets=["Video and audio system design for meeting spaces", "Integration with your existing voice and calendar platform", "One-touch join for scheduled meetings", "Support for spaces of any size, from huddle rooms to boardrooms"]),
+    dict(slug="voice-installation", name="Voice Installation Services", icon="building",
+         headline="Cutover, Handled Without a Business Interruption",
+         meta="Voice installation services from CodeBlue Technology: phone system cutover and installation handled without disrupting your business.",
+         body="Switching phone systems is a common point of business disruption. CodeBlue plans and executes voice installations and cutovers so your team keeps taking calls through the transition, not after it.",
+         bullets=["Cutover planning that avoids business disruption", "On-site installation and hands-on team training", "Number porting handled from start to finish", "Post-installation support through the first weeks of use"]),
+]
+voip_subservice_pills = build_subservices("voip", "Voice / VoIP", "voip.html", "network", voip_subservices)
+
+data_cabling_subservices = [
+    dict(slug="new-construction", name="New Construction Cabling", icon="network",
+         headline="Cabling Planned Before the Walls Go Up",
+         meta="New construction cabling from CodeBlue Technology: structured cabling planned and installed alongside your general contractor's build schedule.",
+         body="New construction is the best time to get cabling right. CodeBlue works from architectural drawings to plan data locations and coordinates installation directly with your general contractor's schedule, so it's done before drywall goes up.",
+         bullets=["Cabling plans built from architectural and technical drawings", "Coordinated directly with your general contractor's timeline", "Central and termination points planned for future growth", "Turnkey proposals covering materials, labor, and documentation"]),
+    dict(slug="low-voltage-repairs", name="Low Voltage Adds &amp; Repairs", icon="network",
+         headline="Fast Fixes and Additions to Existing Cabling",
+         meta="Low voltage cabling adds and repairs from CodeBlue Technology, DCJS-licensed technicians for existing structured cabling systems.",
+         body="Not every cabling job is new construction. CodeBlue handles adds, moves, and repairs to existing structured cabling systems, licensed low voltage work done right the first time.",
+         bullets=["Cable adds and moves for growing or reconfigured spaces", "Troubleshooting and repair for existing cabling issues", "DCJS-licensed low voltage contracting", "Fast turnaround for time-sensitive fixes"]),
+    dict(slug="data-closet-installation", name="Data Closet Installation", icon="building",
+         headline="A Data Room Built to Actually Support Your Network",
+         meta="Data closet installation from CodeBlue Technology: rack storage, access tracking, temperature monitoring, and backup power built in.",
+         body="Your data closet is the physical foundation of your network. CodeBlue builds it out with proper rack storage, access tracking, temperature monitoring, camera security, and backup power, not just a rack in a corner.",
+         bullets=["Rack storage sized to current and future equipment", "HIPAA-compliant access tracking where required", "Temperature monitoring and camera security", "Backup power built into the room design"]),
+    dict(slug="cabling-documentation", name="Cabling Documentation", icon="building",
+         headline="Know What Every Cable Run Actually Is",
+         meta="Cabling documentation from CodeBlue Technology: labeled, mapped, and documented structured cabling so future work doesn't start from zero.",
+         body="Undocumented cabling turns every future project into detective work. CodeBlue labels, maps, and documents every run we install, so the next technician, whether from CodeBlue or not, knows exactly what they're working with.",
+         bullets=["Every cable run labeled at both ends", "As-built documentation delivered after installation", "Port and patch panel mapping for the whole facility", "Documentation that holds up for future contractors, not just us"]),
+    dict(slug="cabling-supplies", name="Cabling Supply Sales", icon="network",
+         headline="The Right Cable, Connectors, and Hardware, In Stock",
+         meta="Cabling supply sales from CodeBlue Technology: cable, connectors, patch panels, and racking hardware for contractors and businesses.",
+         body="CodeBlue sells the cable, connectors, patch panels, and racking hardware behind every installation, whether you're a contractor sourcing materials or a business handling a small project in-house.",
+         bullets=["Cable, connectors, and patch panels for any project size", "Racking and cable management hardware", "Sourced from manufacturers CodeBlue trusts on its own installs", "Available for contractors and businesses alike"]),
+]
+data_cabling_subservice_pills = build_subservices("data-cabling", "Data Cabling", "data-cabling.html", "network", data_cabling_subservices)
+
+premise_security_subservices = [
+    dict(slug="ip-cameras", name="IP Camera Solutions", icon="shield",
+         headline="See Everything That Matters, Clearly, Day or Night",
+         meta="IP camera solutions from CodeBlue Technology: indoor and outdoor camera systems with low-light imaging, installed by licensed DCJS technicians.",
+         body="IP cameras give you real visibility into your facility, indoors and out. CodeBlue designs and installs camera systems ranging from static parking lot units to mobile cameras with color low-light imaging and license plate detection.",
+         bullets=["Indoor and outdoor camera systems, professionally sourced", "Color low-light imaging for clear night footage", "Face and license plate detection where needed", "Installed by licensed DCJS technicians"]),
+    dict(slug="access-control", name="Access Control Systems", icon="shield",
+         headline="Know Who Went Where, and Lock It Down Remotely",
+         meta="Access control systems from CodeBlue Technology: custom-designed entrance and exit control, integrated with your camera system.",
+         body="Access control gives you control over who enters your facility and a record of when they did. CodeBlue designs systems around your actual entrances and exits, with seamless integration between access control and cameras.",
+         bullets=["Custom-designed around your entrances and exits", "Seamless integration with your camera system", "Remote lock and unlock from anywhere", "Detailed access logs for compliance and investigations"]),
+    dict(slug="managed-security", name="Managed Premise Security", icon="shield",
+         headline="Access Changes Handled for You, Not by You",
+         meta="Managed premise security from CodeBlue Technology: door access updates, key and card management, and false alarm prevention, handled for you.",
+         body="Updating door access, issuing new keys, handling replacement cards, and preventing false alarms adds up fast. CodeBlue's managed security program turns that complexity into a hassle-free service, so your team can focus on running the business.",
+         bullets=["Door access updates handled without a service call", "Key and access card issuance and replacement", "False alarm prevention and monitoring", "One partner for cameras, access control, and alarms"]),
+    dict(slug="cellular-cameras", name="Cellular Camera Solutions", icon="shield",
+         headline="Security Cameras Anywhere, No Network Wiring Required",
+         meta="Cellular camera solutions from CodeBlue Technology: fully wireless, solar and battery powered cameras for job sites, lots, and remote locations.",
+         body="Some locations don't have network wiring or reliable power: construction sites, remote lots, temporary sites. CodeBlue's cellular camera solutions run on cellular data and solar or battery power, deployable anywhere in hours, not weeks.",
+         bullets=["Fully wireless, cellular-connected camera units", "Solar and battery power options for remote sites", "Rapid deployment for temporary or seasonal locations", "Live remote viewing from any internet-connected device"]),
+]
+premise_security_subservice_pills = build_subservices("premise-security", "Premise Security &amp; Cameras", "premise-security.html", "shield", premise_security_subservices)
 
 # ---------------------------------------------------------------------------
 # HOMEPAGE
@@ -562,6 +887,18 @@ managed_it = head(
         </div>
       </div>
       {rep_form()}
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head">
+      <div class="brand-rule"></div>
+      <h2>Every Managed IT service, in one place</h2>
+    </div>
+    <div class="pill-row">
+{managed_it_subservice_pills}
     </div>
   </div>
 </section>
@@ -856,9 +1193,21 @@ cyber_security = head(
         <span class="label">Free Risk Assessment</span>
         <h3>Understand your network from a security standpoint</h3>
         <p>Every assessment renders a free report with clear remediation steps to take, no obligation.</p>
-        <a href="contact.html" class="btn btn-ghost">Schedule your assessment</a>
+        <a href="cyber-security/risk-assessments.html" class="btn btn-ghost">See how risk assessments work</a>
       </div>
       {rep_form()}
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head">
+      <div class="brand-rule"></div>
+      <h2>Every Cyber Security service, in one place</h2>
+    </div>
+    <div class="pill-row">
+{cyber_security_subservice_pills}
     </div>
   </div>
 </section>
@@ -945,6 +1294,18 @@ data_center = head(
 
 <section class="section" style="padding-top:0;">
   <div class="container">
+    <div class="section-head">
+      <div class="brand-rule"></div>
+      <h2>Every hosting service, in one place</h2>
+    </div>
+    <div class="pill-row">
+{data_center_subservice_pills}
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
     <div class="cta-panel reveal">
       <h2>Let's talk about your team's technology.</h2>
       <p>Tell us what you need and a rep will follow up within 1 business hour.</p>
@@ -1001,14 +1362,26 @@ voip = head(
         <h2>Keep your numbers and your calls, without interruption</h2>
         <p>Businesses starting on-premise can migrate to the cloud without rebuilding their system, or run both in tandem with seamless hand-off between environments. Our voice engineers train your team on every feature, hands-on.</p>
         <div class="pill-row" style="margin-top:22px;">
-          <span class="pill">Hardware Phone Systems</span>
-          <span class="pill">Cloud Hosted Voice</span>
-          <span class="pill">Conference Room Systems</span>
-          <span class="pill">SIP Voice Services</span>
-          <span class="pill">Call Center Solutions</span>
+          <a class="pill" href="voip/phone-hardware.html">Hardware Phone Systems</a>
+          <a class="pill" href="voip/cloud-voice.html">Cloud Hosted Voice</a>
+          <a class="pill" href="voip/conference-room.html">Conference Room Systems</a>
+          <a class="pill" href="voip/sip-trunking.html">SIP Voice Services</a>
+          <a class="pill" href="voip/call-center.html">Call Center Solutions</a>
         </div>
       </div>
       {rep_form()}
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head">
+      <div class="brand-rule"></div>
+      <h2>Every Voice / VoIP service, in one place</h2>
+    </div>
+    <div class="pill-row">
+{voip_subservice_pills}
     </div>
   </div>
 </section>
@@ -1075,6 +1448,18 @@ data_cabling = head(
     </div>
   </div>
 </section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head">
+      <div class="brand-rule"></div>
+      <h2>Every Data Cabling service, in one place</h2>
+    </div>
+    <div class="pill-row">
+{data_cabling_subservice_pills}
+    </div>
+  </div>
+</section>
 </main>
 """ + footer()
 write("data-cabling.html", data_cabling)
@@ -1135,6 +1520,18 @@ premise_security = head(
         <p>Hiring a DCJS-certified contractor ensures your security installation meets Virginia's regulated standards for safety, reliability, and compliance. CodeBlue Technology's DCJS ID is 11-16835.</p>
       </div>
       {rep_form()}
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head">
+      <div class="brand-rule"></div>
+      <h2>Every Premise Security service, in one place</h2>
+    </div>
+    <div class="pill-row">
+{premise_security_subservice_pills}
     </div>
   </div>
 </section>
@@ -1439,4 +1836,5 @@ careers = head(
 """ + footer()
 write("careers.html", careers)
 
+write_sitemap()
 print("\nDone.")
