@@ -1065,7 +1065,7 @@ about = head(
   <div class="container">
     <div class="section-head">
       <div class="brand-rule"></div>
-      <h2>Started local, stayed local</h2>
+      <h2>Supporting Central Virginia and Beyond!</h2>
     </div>
     <p>CodeBlue Technology was founded on January 1, 2003 by Trey Hayden to service the computing and information technology needs of businesses throughout Central Virginia. Trey built a successful career in the specialty since 1990, and CodeBlue opened its doors in 2003 with a list of loyal clients built on a foundation that remains Core Values Driven today.</p>
   </div>
