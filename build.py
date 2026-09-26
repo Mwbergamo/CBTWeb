@@ -160,7 +160,7 @@ def footer(prefix=""):
 
 def rep_form(prefix=""):
     return f"""<div class="rep-form card reveal">
-  <h3>Talk to a Rep</h3>
+  <h3>Contact Us</h3>
   <p class="sub">A CodeBlue rep will call, text, or email you within 1 business hour.</p>
   <form>
     <div class="field">
@@ -446,7 +446,7 @@ def build_subservices(parent_slug, parent_label, parent_page, default_icon, item
     <div class="split reveal">
       <div>
         <span class="label">Talk to a specialist</span>
-        <h2>Talk to a rep about {d['name']}</h2>
+        <h2>Contact us about {d['name']}</h2>
         <p>Tell us about your business and a CodeBlue rep will follow up within 1 business hour with next steps for {d['name']}.</p>
         <div class="pill-row" style="margin-top:22px;">
 {related_pills}
@@ -1128,7 +1128,7 @@ about = head(
   <div class="container">
     <div class="cta-panel reveal">
       <h2>Let's talk about your team's technology.</h2>
-      <p>Talk to a rep about what your business needs.</p>
+      <p>Contact us about what your business needs.</p>
       <div class="hero-ctas">
         <a href="contact.html" class="btn btn-primary">Contact us!</a>
       </div>
