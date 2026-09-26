@@ -567,7 +567,7 @@ cyber_security_subservices = [
          meta="Free network risk assessments from CodeBlue Technology: a clear report on vulnerabilities and remediation steps, no obligation.",
          body="Every engagement starts with a clear picture of where you stand. CodeBlue's risk assessments scan your network for vulnerabilities and produce a plain-language report with remediation steps, whether or not you become a client.",
          bullets=["Full network vulnerability scan and risk scoring", "Plain-language report, not a wall of technical jargon", "Prioritized remediation steps ranked by risk", "Free and no-obligation, for prospective and existing clients"],
-         photo="images/hero-risk-assessments.jpg", photo_alt="A cyber security analyst reviewing a network risk assessment report"),
+         photo="images/hero-risk-assessments.jpg", photo_alt="Two colleagues reviewing a network risk assessment report together"),
     dict(slug="data-backup", name="Data Backup", icon="shield",
          headline="Your Data, Backed Up Wherever It Actually Lives",
          meta="Modern data backup from CodeBlue Technology: cloud, on-premise, and hybrid data discovered and backed up wherever it lives.",
