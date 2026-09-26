@@ -88,7 +88,7 @@ def header(active="", prefix=""):
     </nav>
     <div class="header-actions">
       <a class="header-phone mono" href="tel:{PHONE_TEL}">{PHONE}</a>
-      <a class="btn btn-primary" href="{prefix}contact.html">Talk to a Rep</a>
+      <a class="btn btn-primary" href="{prefix}contact.html">Contact us!</a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
     </div>
   </div>
@@ -417,7 +417,7 @@ def build_subservices(parent_slug, parent_label, parent_page, default_icon, item
           <span class="label">{parent_label} &rsaquo; {d['name']}</span>
           <h1>{d['headline']}</h1>
           <p class="lead">{d['body']}</p>
-          <div class="hero-ctas"><a href="../contact.html" class="btn btn-primary">Talk to a Rep</a><a href="../{parent_page}" class="btn btn-ghost">See all {parent_label}</a></div>
+          <div class="hero-ctas"><a href="../contact.html" class="btn btn-primary">Contact us!</a><a href="../{parent_page}" class="btn btn-ghost">See all {parent_label}</a></div>
         </div>
         <div class="hero-media">
           {photo_fill(d['photo'], d.get('photo_alt', d['name']), prefix="../") if d.get('photo') else material_panel(d.get('icon', default_icon), sum(ord(c) for c in d['slug']) % 90)}
@@ -729,7 +729,7 @@ home = head(
     "Central Virginia, since 2003",
     "Support that follows your team, not your equipment.",
     "Managed IT, cyber security, VoIP, data cabling, and premise security, Core Values Driven for businesses across Richmond and the Northern Neck, with a rep who actually knows your team.",
-    '<a href="contact.html" class="btn btn-primary">Talk to a Rep</a><a href="peoplefirst-support.html" class="btn btn-ghost">See PeopleFirst Support</a>',
+    '<a href="contact.html" class="btn btn-primary">Contact us!</a><a href="peoplefirst-support.html" class="btn btn-ghost">See PeopleFirst Support</a>',
     "network",
 )}
 
@@ -817,7 +817,7 @@ home = head(
       <h2>Let's talk about your team's technology.</h2>
       <p>Tell us what you need and a rep will follow up within 1 business hour.</p>
       <div class="hero-ctas">
-        <a href="contact.html" class="btn btn-primary">Talk to a Rep</a>
+        <a href="contact.html" class="btn btn-primary">Contact us!</a>
         <a href="tel:{PHONE_TEL}" class="btn btn-ghost-invert">Call {PHONE}</a>
       </div>
     </div>
@@ -839,7 +839,7 @@ managed_it = head(
     "Managed IT Services",
     "IT support that actually knows your business.",
     "Flat-rate managed IT for growing teams. Proactive monitoring, a real help desk, and a plan built around how your people actually work.",
-    '<a href="contact.html" class="btn btn-primary">Talk to a Rep</a><a href="peoplefirst-support.html" class="btn btn-ghost">Compare with PeopleFirst</a>',
+    '<a href="contact.html" class="btn btn-primary">Contact us!</a><a href="peoplefirst-support.html" class="btn btn-ghost">Compare with PeopleFirst</a>',
     "building",
     media=photo_fill("images/hero-managed-it.jpg", "A CodeBlue managed IT technician working at a workstation"),
 )}
@@ -951,7 +951,7 @@ peoplefirst = head(
     "Flagship offer",
     "Support that follows your team, not your equipment.",
     "One flat rate per person, not per device. PeopleFirst Support covers everything a team member touches: hardware, software, vendors, and cyber security, on-site and remote.",
-    '<a href="contact.html" class="btn btn-primary">Talk to a Rep</a><a href="#pricing" class="btn btn-ghost">How pricing works</a>',
+    '<a href="contact.html" class="btn btn-primary">Contact us!</a><a href="#pricing" class="btn btn-ghost">How pricing works</a>',
     "people",
 )}
 
@@ -1130,7 +1130,7 @@ about = head(
       <h2>Let's talk about your team's technology.</h2>
       <p>Talk to a rep about what your business needs.</p>
       <div class="hero-ctas">
-        <a href="contact.html" class="btn btn-primary">Talk to a Rep</a>
+        <a href="contact.html" class="btn btn-primary">Contact us!</a>
       </div>
     </div>
   </div>
@@ -1185,7 +1185,7 @@ cyber_security = head(
     "Cyber Security",
     "Comprehensive protection, built around your business.",
     "CodeBlue Technology delivers layered cyber security services that protect your endpoints, your cloud accounts, and your people, so a single mistake doesn't become a breach.",
-    '<a href="contact.html" class="btn btn-primary">Talk to a Rep</a><a href="#risk-assessment" class="btn btn-ghost">Get a free risk assessment</a>',
+    '<a href="contact.html" class="btn btn-primary">Contact us!</a><a href="#risk-assessment" class="btn btn-ghost">Get a free risk assessment</a>',
     "shield",
     media=photo_fill("images/hero-cyber-security.jpg", "A cyber security analyst monitoring systems on a multi-screen setup"),
 )}
@@ -1261,7 +1261,7 @@ data_center = head(
     "Cloud & Data Center Hosting",
     "Richmond's largest private cloud.",
     "CodeBlue Technology hosts dedicated, compliant, highly resilient server environments, matched to your workload and backed by a local team you can actually call.",
-    '<a href="contact.html" class="btn btn-primary">Talk to a Rep</a><a href="data-cabling.html" class="btn btn-ghost">See data cabling</a>',
+    '<a href="contact.html" class="btn btn-primary">Contact us!</a><a href="data-cabling.html" class="btn btn-ghost">See data cabling</a>',
     "building",
     media=photo_fill("images/data-center.jpg", "Server racks inside CodeBlue Technology's private data center"),
 )}
@@ -1304,7 +1304,7 @@ data_center = head(
         <span class="label">Private Cloud Hosting</span>
         <h2>Stability and control that public cloud can't match</h2>
         <p>Private cloud hosting with CodeBlue avoids the unexpected price changes and program cancellations that come with public cloud services, so your costs and access stay consistent.</p>
-        <a href="contact.html" class="btn btn-ghost">Talk to a rep</a>
+        <a href="contact.html" class="btn btn-ghost">Contact us!</a>
       </div>
       <div class="split-media">
         {photo_fill("images/hero-private-cloud-split.jpg", "A row of dedicated private cloud server racks in CodeBlue's data center")}
@@ -1344,7 +1344,7 @@ data_center = head(
       <h2>Let's talk about your team's technology.</h2>
       <p>Tell us what you need and a rep will follow up within 1 business hour.</p>
       <div class="hero-ctas">
-        <a href="contact.html" class="btn btn-primary">Talk to a Rep</a>
+        <a href="contact.html" class="btn btn-primary">Contact us!</a>
         <a href="tel:{PHONE_TEL}" class="btn btn-ghost-invert">Call {PHONE}</a>
       </div>
     </div>
@@ -1366,7 +1366,7 @@ voip = head(
     "Voice / VoIP",
     "Your office phone just got a lot more capable.",
     "CodeBlue's voice platform has empowered businesses since 2003, on-premise, in the cloud, or both, with the features your team actually uses every day.",
-    '<a href="contact.html" class="btn btn-primary">Talk to a Rep</a><a href="#demo" class="btn btn-ghost">Request a demo</a>',
+    '<a href="contact.html" class="btn btn-primary">Contact us!</a><a href="#demo" class="btn btn-ghost">Request a demo</a>',
     "network",
     media=material_panel("network", 701) + photo_overlay("images/voip-devices.png", "CodeBlue's voice platform running on desktop, laptop, tablet, and desk phone"),
 )}
@@ -1435,7 +1435,7 @@ data_cabling = head(
     "Data Cabling",
     "From the wall to the desk.",
     "Properly scoped, installed, and documented wiring is part of the construction of your space. CodeBlue plans, installs, and documents it so your business connects without the hassle.",
-    '<a href="contact.html" class="btn btn-primary">Talk to a Rep</a><a href="premise-security.html" class="btn btn-ghost">See premise security</a>',
+    '<a href="contact.html" class="btn btn-primary">Contact us!</a><a href="premise-security.html" class="btn btn-ghost">See premise security</a>',
     "network",
     media=photo_fill("images/hero-data-cabling.jpg", "A technician installing structured data cabling"),
 )}
@@ -1511,7 +1511,7 @@ premise_security = head(
     "Premise Security & Cameras",
     "Protect your space, inside and out.",
     "CodeBlue Technology designs access control and networked camera systems around your entrances, your risk, and your growth, installed by licensed DCJS technicians.",
-    '<a href="contact.html" class="btn btn-primary">Talk to a Rep</a><a href="data-cabling.html" class="btn btn-ghost">See data cabling</a>',
+    '<a href="contact.html" class="btn btn-primary">Contact us!</a><a href="data-cabling.html" class="btn btn-ghost">See data cabling</a>',
     "shield",
 )}
 
@@ -1538,7 +1538,7 @@ premise_security = head(
         <span class="label">Managed Security</span>
         <h2>Access changes handled for you, not by you</h2>
         <p>Updating door access, issuing new keys, handling replacement cards, and preventing false alarms adds up fast. Our partner support program turns that complexity into a hassle-free service, so you can focus on running your business.</p>
-        <a href="contact.html" class="btn btn-ghost">Talk to a rep</a>
+        <a href="contact.html" class="btn btn-ghost">Contact us!</a>
       </div>
       <div class="split-media">
         {material_panel("shield", 93)}
@@ -1650,7 +1650,7 @@ industries = head(
     "Industries",
     "Built for the way your industry actually works.",
     "Every industry has different rules, risk, and daily workflow. Here's how CodeBlue Technology tailors IT support to the businesses we serve most.",
-    '<a href="contact.html" class="btn btn-primary">Talk to a Rep</a>',
+    '<a href="contact.html" class="btn btn-primary">Contact us!</a>',
     "people",
 )}
 {stat_strip()}
@@ -1667,7 +1667,7 @@ industries = head(
       <h2>Don't see your industry?</h2>
       <p>We support businesses across Central Virginia beyond the industries above. Tell us what you do and we'll show you how CodeBlue fits.</p>
       <div class="hero-ctas">
-        <a href="contact.html" class="btn btn-primary">Talk to a Rep</a>
+        <a href="contact.html" class="btn btn-primary">Contact us!</a>
       </div>
     </div>
   </div>
@@ -1696,7 +1696,7 @@ for d in industries_data:
           <span class="label">Industries &rsaquo; {d['name']}</span>
           <h1>{d['headline']}</h1>
           <p class="lead">{d['body']}</p>
-          <div class="hero-ctas"><a href="../contact.html" class="btn btn-primary">Talk to a Rep</a><a href="../industries.html" class="btn btn-ghost">See all industries</a></div>
+          <div class="hero-ctas"><a href="../contact.html" class="btn btn-primary">Contact us!</a><a href="../industries.html" class="btn btn-ghost">See all industries</a></div>
         </div>
         <div class="hero-media">
           {photo_fill(d['photo'], d.get('photo_alt', d['name']), prefix="../") if d.get('photo') else material_panel(d['icon'], sum(ord(c) for c in d['slug']) % 90)}
@@ -1751,7 +1751,7 @@ resources = head(
     "Resources",
     "Guides and tools for business owners.",
     "Free downloads, checklists, and a free network risk assessment, no obligation.",
-    '<a href="contact.html" class="btn btn-primary">Talk to a Rep</a>',
+    '<a href="contact.html" class="btn btn-primary">Contact us!</a>',
     "building",
 )}
 {stat_strip()}
