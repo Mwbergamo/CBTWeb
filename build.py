@@ -128,6 +128,7 @@ def footer(prefix=""):
         <ul>
           <li><a href="{prefix}about.html">About</a></li>
           <li><a href="{prefix}industries.html">Industries</a></li>
+          <li><a href="{prefix}northern-neck.html">Northern Neck</a></li>
           <li><a href="{prefix}resources.html">Resources</a></li>
           <li><a href="{prefix}careers.html">Careers</a></li>
         </ul>
@@ -1280,6 +1281,106 @@ about = head(
 </main>
 """ + footer()
 write("about.html", about)
+
+# ---------------------------------------------------------------------------
+# NORTHERN NECK
+# ---------------------------------------------------------------------------
+northern_neck = head(
+    "Northern Neck IT Services | CodeBlue Technology in Warsaw, VA",
+    "CodeBlue Technology's local IT company for the Northern Neck: managed IT, cyber security, VoIP, data cabling, and premise security from our Warsaw, VA office."
+) + header("northern-neck.html") + f"""
+<main id="main">
+{hero(
+    "Northern Neck",
+    "The Northern Neck's Local IT Company",
+    "CodeBlue believes friendly, helpful support for your business is the most important aspect of the relationship. Computers and networking, cyber security, internet and phone services, and business technology consultation, Core Values Driven for the Northern Neck since 2003.",
+    '<a href="contact.html" class="btn btn-primary">Contact us!</a><a href="tel:+18044564500" class="btn btn-ghost">Call (804) 456-4500</a>',
+    media=photo_fill("images/hero-northern-neck.jpg", "The CodeBlue Technology storefront in Warsaw, VA"),
+)}
+
+{stat_strip()}
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div class="brand-rule"></div>
+      <h2>We're there to help</h2>
+    </div>
+    <div class="split reveal" style="align-items:start;">
+      <div>
+        <p>CodeBlue has served businesses throughout the Northern Neck and Middle Peninsula since 2003, with a local office in Warsaw backing it up. Whatever the need, we come to you.</p>
+        <div class="bento" style="grid-template-columns:1fr 1fr; margin-top:18px;">
+          <div class="tile b-sm reveal"><p>Computers and networking</p></div>
+          <div class="tile b-sm reveal"><p>Cyber security</p></div>
+          <div class="tile b-sm reveal"><p>Internet and phone services</p></div>
+          <div class="tile b-sm reveal"><p>Business technology consultation</p></div>
+        </div>
+      </div>
+      <div class="split-media">
+        {photo_fill("images/northern-neck-service-map.jpg", "Map of CodeBlue Technology's Northern Neck service areas")}
+      </div>
+    </div>
+    <div class="pill-row" style="margin-top:24px;">
+      <span class="pill">Kilmarnock</span>
+      <span class="pill">Warsaw</span>
+      <span class="pill">Montross</span>
+      <span class="pill">Colonial Beach</span>
+      <span class="pill">Heathsville</span>
+      <span class="pill">Irvington</span>
+      <span class="pill">White Stone</span>
+      <span class="pill">Callao</span>
+      <span class="pill">Lottsburg</span>
+      <span class="pill">Reedville</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head">
+      <div class="brand-rule"></div>
+      <h2>What we bring to the Northern Neck</h2>
+    </div>
+    <div class="bento">
+      <div class="tile b-md tile-brand reveal"><h3>Managed IT & PeopleFirst Support</h3><p>Computers, networking, and day-to-day IT support for your whole team.</p></div>
+      <div class="tile b-md reveal"><h3>Cyber Security</h3><p>Risk assessments, monitoring, and protection built for small business budgets.</p></div>
+      <div class="tile b-md tile-accent reveal"><h3>Voice / VoIP</h3><p>Reliable business phone service over the internet connection you already have.</p></div>
+      <div class="tile b-md reveal"><h3>Data Cabling</h3><p>Structured cabling for offices, retail, and new construction across the region.</p></div>
+      <div class="tile b-md reveal"><h3>Premise Security & Cameras</h3><p>DCJS-licensed access control and camera installs for your building.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="bento" style="grid-template-columns:1fr 1fr;">
+      <div class="card reveal">
+        <h3>Visit CodeBlue in Warsaw</h3>
+        <p>5020 Richmond Rd STE A<br>Warsaw, VA 22572<br><a href="tel:+18044564500">(804) 456-4500</a><br><a href="mailto:{EMAIL}">{EMAIL}</a></p>
+      </div>
+      <div class="card reveal">
+        <h3>Free Risk Assessment</h3>
+        <p>We'll come to you. Every assessment renders a free report with remediation steps to take, no strings attached.</p>
+        <a href="cyber-security/risk-assessments.html" class="btn btn-ghost">Schedule your assessment</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="cta-panel reveal">
+      <h2>Let's talk about your team's technology.</h2>
+      <p>Contact us about what your Northern Neck business needs.</p>
+      <div class="hero-ctas">
+        <a href="contact.html" class="btn btn-primary">Contact us!</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+""" + footer()
+write("northern-neck.html", northern_neck)
 
 # ---------------------------------------------------------------------------
 # CONTACT
