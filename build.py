@@ -111,7 +111,7 @@ def footer(prefix=""):
     <div class="footer-grid">
       <div>
         <div class="footer-brand"><img src="{prefix}images/icon-pulse-outline.png" alt="" width="22" height="22" loading="lazy"> <h4>CodeBlue Technology</h4></div>
-        <p style="color:rgba(246,245,242,0.62); max-width:34ch;">Founded 2003 in Richmond, VA. 550+ active clients across Central Virginia and the Northern Neck. Managed IT, cyber security, data cabling, VoIP, and premise security. Support that follows your team, not your equipment.</p>
+        <p style="color:rgba(246,245,242,0.62); max-width:34ch;">Founded 2003 in Richmond, VA. Core Values Driven, serving businesses across Central Virginia and the Northern Neck. Managed IT, cyber security, data cabling, VoIP, and premise security. Support that follows your team, not your equipment.</p>
         <div class="footer-social">
           <a href="#">Facebook</a><a href="#">LinkedIn</a><a href="#">Instagram</a><a href="#">Podcast</a>
         </div>
@@ -270,8 +270,8 @@ def stat_strip():
   <div class="container">
     <ul>
       <li><strong class="mono">2003</strong><span>Founded in Richmond, VA</span></li>
-      <li><strong class="mono">550+</strong><span>Active clients</span></li>
-      <li><strong class="mono">20+</strong><span>Years in Central Virginia</span></li>
+      <li><strong class="mono">Core Values</strong><span>Driven</span></li>
+      <li><strong class="mono">Tailored</strong><span>Support Options</span></li>
       <li><strong class="mono">DCJS</strong><span>Licensed security techs</span></li>
     </ul>
   </div>
@@ -727,7 +727,7 @@ home = head(
 {hero(
     "Central Virginia, since 2003",
     "Support that follows your team, not your equipment.",
-    "Managed IT, cyber security, VoIP, data cabling, and premise security for 550+ businesses across Richmond and the Northern Neck, with a rep who actually knows your team.",
+    "Managed IT, cyber security, VoIP, data cabling, and premise security, Core Values Driven for businesses across Richmond and the Northern Neck, with a rep who actually knows your team.",
     '<a href="contact.html" class="btn btn-primary">Talk to a Rep</a><a href="peoplefirst-support.html" class="btn btn-ghost">See PeopleFirst Support</a>',
     "network",
 )}
@@ -1046,13 +1046,13 @@ write("peoplefirst-support.html", peoplefirst)
 # ---------------------------------------------------------------------------
 about = head(
     "About CodeBlue Technology | Richmond, VA Managed IT Provider",
-    "Founded in 2003 in Richmond, VA. CodeBlue Technology serves 550+ businesses across Central Virginia with managed IT, cyber security, and more."
+    "Founded in 2003 in Richmond, VA. CodeBlue Technology is Core Values Driven, serving businesses across Central Virginia with managed IT, cyber security, and more."
 ) + header("about.html") + f"""
 <main id="main">
 {hero(
     "About us",
-    "20+ years of keeping Central Virginia businesses running.",
-    "Founded in 2003 and based in Richmond, VA, CodeBlue Technology has grown alongside the businesses we serve, now supporting 550+ active clients across Richmond and the Northern Neck.",
+    "Tailored Support Options for Central Virginia businesses.",
+    "Founded in 2003 and based in Richmond, VA, CodeBlue Technology has grown alongside the businesses we serve, staying Core Values Driven for clients across Richmond and the Northern Neck.",
     "",
     "building",
     media=photo_fill("images/office-open-floor.jpg", "Inside the CodeBlue Technology office in Mechanicsville, VA"),
@@ -1066,7 +1066,7 @@ about = head(
       <div class="brand-rule"></div>
       <h2>Started local, stayed local</h2>
     </div>
-    <p>CodeBlue Technology was founded on January 1, 2003 by Trey Hayden to service the computing and information technology needs of businesses throughout Central Virginia. Trey built a successful career in the specialty since 1990, and CodeBlue opened its doors in 2003 with a list of loyal clients that extends to over 550 active clients today.</p>
+    <p>CodeBlue Technology was founded on January 1, 2003 by Trey Hayden to service the computing and information technology needs of businesses throughout Central Virginia. Trey built a successful career in the specialty since 1990, and CodeBlue opened its doors in 2003 with a list of loyal clients built on a foundation that remains Core Values Driven today.</p>
   </div>
 </section>
 
