@@ -1,15 +1,27 @@
 // CodeBlue Technology - shared site behavior (no framework, no build step)
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Mobile nav toggle
+  // Mobile nav toggle (right-side drawer + scrim)
   var toggle = document.querySelector(".nav-toggle");
   var mobileNav = document.querySelector(".nav-mobile");
+  var scrim = document.querySelector(".nav-scrim");
+  function setNavOpen(open) {
+    if (mobileNav) mobileNav.classList.toggle("open", open);
+    if (scrim) scrim.classList.toggle("open", open);
+    if (toggle) toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    document.body.classList.toggle("nav-open", open);
+  }
   if (toggle && mobileNav) {
     toggle.addEventListener("click", function () {
-      var open = mobileNav.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      setNavOpen(!mobileNav.classList.contains("open"));
     });
   }
+  if (scrim) {
+    scrim.addEventListener("click", function () { setNavOpen(false); });
+  }
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") setNavOpen(false);
+  });
 
   // "Talk to a rep" 3-field micro-forms (there may be more than one per page)
   var repForms = document.querySelectorAll(".rep-form form");

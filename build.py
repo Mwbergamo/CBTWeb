@@ -92,17 +92,18 @@ def header(active="", prefix=""):
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
     </div>
   </div>
-  <div class="nav-mobile">
-    <div class="container">
-      <details open>
-        <summary>Solutions</summary>
-{mobile_solutions}
-      </details>
-{mobile_top}
-      <a href="{prefix}contact.html" style="margin-top:10px;">Contact</a>
-    </div>
-  </div>
 </header>
+<div class="nav-scrim"></div>
+<div class="nav-mobile">
+  <div class="container">
+    <details open>
+      <summary>Solutions</summary>
+{mobile_solutions}
+    </details>
+{mobile_top}
+    <a href="{prefix}contact.html" style="margin-top:10px;">Contact</a>
+  </div>
+</div>
 """
 
 def footer(prefix=""):
@@ -148,8 +149,8 @@ def footer(prefix=""):
   </div>
 </footer>
 <div class="call-bar">
-  <a href="tel:{PHONE_TEL}">Call {PHONE}</a>
-  <a href="sms:{PHONE_TEL}">Text Us</a>
+  <a href="tel:{PHONE_TEL}"><span class="call-bar-label">Richmond</span><span class="call-bar-num">{PHONE}</span></a>
+  <a href="tel:+18044564500"><span class="call-bar-label">Warsaw</span><span class="call-bar-num">(804) 456-4500</span></a>
 </div>
 <script src="{prefix}js/main.js"></script>
 <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
