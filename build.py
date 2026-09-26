@@ -436,7 +436,7 @@ def build_subservices(parent_slug, parent_label, parent_page, default_icon, item
       <h2>What's included</h2>
     </div>
     <div class="bento">
-      {"".join(f'<div class="tile b-md reveal"><span class="icon">{i+1:02d}</span><p>{b}</p></div>' for i, b in enumerate(d['bullets']))}
+      {"".join(f'<div class="tile b-md reveal"><p>{b}</p></div>' for i, b in enumerate(d['bullets']))}
     </div>
   </div>
 </section>
@@ -743,32 +743,32 @@ home = head(
     </div>
     <div class="bento">
       <a class="tile b-lg tile-brand reveal" href="managed-it.html">
-        <span class="icon">01</span>
+        
         <h3>Managed IT &amp; PeopleFirst Support</h3>
         <p>Flat per-person pricing that covers every device, vendor, and cyber tool your team touches.</p>
       </a>
       <a class="tile b-md tile-accent reveal" href="cyber-security.html">
-        <span class="icon">02</span>
+        
         <h3>Cyber Security</h3>
         <p>Endpoint protection, phishing training, and 24/7 threat monitoring.</p>
       </a>
       <a class="tile b-md reveal" href="data-center.html">
-        <span class="icon">03</span>
+        
         <h3>Cloud &amp; Data Center Hosting</h3>
         <p>Private and public cloud, failover, SOC II-compliant hosting.</p>
       </a>
       <a class="tile b-sm reveal" href="voip.html">
-        <span class="icon">04</span>
+        
         <h3>Voice / VoIP</h3>
         <p>Cloud and premise voice, SIP trunking, call center.</p>
       </a>
       <a class="tile b-sm tile-accent reveal" href="data-cabling.html">
-        <span class="icon">05</span>
+        
         <h3>Data Cabling</h3>
         <p>DCJS-licensed structured cabling and infrastructure.</p>
       </a>
       <a class="tile b-sm reveal" href="premise-security.html">
-        <span class="icon">06</span>
+        
         <h3>Premise Security</h3>
         <p>Access control and camera systems, monitored.</p>
       </a>
@@ -854,15 +854,15 @@ managed_it = head(
     </div>
     <div class="bento">
       <div class="tile b-md reveal">
-        <span class="icon">01</span><h3>Provided Software</h3>
+        <h3>Provided Software</h3>
         <p>End-point protection, data backup, cyber security, Microsoft 365 protection, and both Windows and third-party patch management, kept organized and compliant.</p>
       </div>
       <div class="tile b-md tile-accent reveal">
-        <span class="icon">02</span><h3>Co-Managed IT Support</h3>
+        <h3>Co-Managed IT Support</h3>
         <p>Project management, asset management, renewals management, help desk support, technology sales, and on/off-boarding management, backing up your existing IT team.</p>
       </div>
       <div class="tile b-md tile-brand reveal">
-        <span class="icon">03</span><h3>PeopleFirst IT Support</h3>
+        <h3>PeopleFirst IT Support</h3>
         <p>Vendor management, provided equipment, licensing management, vCIO/CISO services, risk assessments, and on-site/remote support, all covered per person.</p>
       </div>
     </div>
@@ -876,9 +876,9 @@ managed_it = head(
       <h2>How does IT onboarding work?</h2>
     </div>
     <div class="steps reveal">
-      <div class="step"><div class="num"></div><div><h3>Discovery and Alignment</h3><p>A discovery call or site visit to understand your needs, producing options that start your team here at CodeBlue.</p></div></div>
-      <div class="step"><div class="num"></div><div><h3>Tailored Service Options</h3><p>Your business is unique, so CodeBlue forms options around your budget, goals, and requirements to ensure a great fit.</p></div></div>
-      <div class="step"><div class="num"></div><div><h3>Onboarding and Integration</h3><p>Our team works to align with yours at every stage, from systems management to support metrics, aiming to exceed expectations.</p></div></div>
+      <div class="step"><div><h3>Discovery and Alignment</h3><p>A discovery call or site visit to understand your needs, producing options that start your team here at CodeBlue.</p></div></div>
+      <div class="step"><div><h3>Tailored Service Options</h3><p>Your business is unique, so CodeBlue forms options around your budget, goals, and requirements to ensure a great fit.</p></div></div>
+      <div class="step"><div><h3>Onboarding and Integration</h3><p>Our team works to align with yours at every stage, from systems management to support metrics, aiming to exceed expectations.</p></div></div>
     </div>
   </div>
 </section>
@@ -974,12 +974,12 @@ peoplefirst = head(
       <h2>Six things, covered for every person</h2>
     </div>
     <div class="bento">
-      <div class="tile b-md tile-brand reveal"><span class="icon">01</span><h3>Vendor Management</h3><p>We're the ones on hold with your vendors, not you.</p></div>
-      <div class="tile b-md reveal"><span class="icon">02</span><h3>Provided Equipment</h3><p>Hardware sourced, provisioned, and supported as part of the plan.</p></div>
-      <div class="tile b-md tile-accent reveal"><span class="icon">03</span><h3>Licensing Management</h3><p>Software licensing kept organized, current, and compliant.</p></div>
-      <div class="tile b-md reveal"><span class="icon">04</span><h3>vCIO / CISO Services</h3><p>Strategic technology and security guidance at the leadership level.</p></div>
-      <div class="tile b-md reveal"><span class="icon">05</span><h3>Risk Assessments</h3><p>Regular assessments that catch exposure before it becomes an incident.</p></div>
-      <div class="tile b-md tile-accent reveal"><span class="icon">06</span><h3>On-Site / Remote Support</h3><p>Help wherever your team is working, in the office or out.</p></div>
+      <div class="tile b-md tile-brand reveal"><h3>Vendor Management</h3><p>We're the ones on hold with your vendors, not you.</p></div>
+      <div class="tile b-md reveal"><h3>Provided Equipment</h3><p>Hardware sourced, provisioned, and supported as part of the plan.</p></div>
+      <div class="tile b-md tile-accent reveal"><h3>Licensing Management</h3><p>Software licensing kept organized, current, and compliant.</p></div>
+      <div class="tile b-md reveal"><h3>vCIO / CISO Services</h3><p>Strategic technology and security guidance at the leadership level.</p></div>
+      <div class="tile b-md reveal"><h3>Risk Assessments</h3><p>Regular assessments that catch exposure before it becomes an incident.</p></div>
+      <div class="tile b-md tile-accent reveal"><h3>On-Site / Remote Support</h3><p>Help wherever your team is working, in the office or out.</p></div>
     </div>
   </div>
 </section>
@@ -1115,10 +1115,10 @@ about = head(
       <h2>CodeBlue Cares, our non-profit community foundation</h2>
     </div>
     <div class="bento">
-      <div class="tile b-md tile-brand reveal"><span class="icon">01</span><h3>Coats for Kids</h3><p>311 coats donated to Puritan Cleaners for distribution to Central Virginia families in need.</p></div>
-      <div class="tile b-md reveal"><span class="icon">02</span><h3>USO Ramen Drive</h3><p>12,024 packages of ramen donated to the USO, distributed to USO divisions throughout Virginia.</p></div>
-      <div class="tile b-md tile-accent reveal"><span class="icon">03</span><h3>Little League Sponsorships</h3><p>CodeBlue sponsors area Little League organizations across Central Virginia.</p></div>
-      <div class="tile b-md reveal"><span class="icon">04</span><h3>International Rotary</h3><p>CodeBlue is home to several active Rotarians in both Mechanicsville and Warsaw, VA.</p></div>
+      <div class="tile b-md tile-brand reveal"><h3>Coats for Kids</h3><p>311 coats donated to Puritan Cleaners for distribution to Central Virginia families in need.</p></div>
+      <div class="tile b-md reveal"><h3>USO Ramen Drive</h3><p>12,024 packages of ramen donated to the USO, distributed to USO divisions throughout Virginia.</p></div>
+      <div class="tile b-md tile-accent reveal"><h3>Little League Sponsorships</h3><p>CodeBlue sponsors area Little League organizations across Central Virginia.</p></div>
+      <div class="tile b-md reveal"><h3>International Rotary</h3><p>CodeBlue is home to several active Rotarians in both Mechanicsville and Warsaw, VA.</p></div>
     </div>
     <p style="margin-top:20px;"><a href="https://codebluecares.org" class="btn btn-ghost">Visit CodeBlue Cares</a></p>
   </div>
@@ -1199,9 +1199,9 @@ cyber_security = head(
       <h2>Three layers of protection, covered in every plan</h2>
     </div>
     <div class="bento">
-      <div class="tile b-md tile-brand reveal"><span class="icon">01</span><h3>Asset Security</h3><p>Endpoint detection and response, ransomware protection with roll-back, off-site backup replication, and drive encryption on every device.</p></div>
-      <div class="tile b-md reveal"><span class="icon">02</span><h3>Cloud Security</h3><p>Microsoft 365 and Google Workspace data security, multi-factor authentication, and cloud-to-cloud backup and replication.</p></div>
-      <div class="tile b-md tile-accent reveal"><span class="icon">03</span><h3>End User Training</h3><p>Monthly phishing simulations, cyber security best-practice updates, and documented policy and procedure for your organization.</p></div>
+      <div class="tile b-md tile-brand reveal"><h3>Asset Security</h3><p>Endpoint detection and response, ransomware protection with roll-back, off-site backup replication, and drive encryption on every device.</p></div>
+      <div class="tile b-md reveal"><h3>Cloud Security</h3><p>Microsoft 365 and Google Workspace data security, multi-factor authentication, and cloud-to-cloud backup and replication.</p></div>
+      <div class="tile b-md tile-accent reveal"><h3>End User Training</h3><p>Monthly phishing simulations, cyber security best-practice updates, and documented policy and procedure for your organization.</p></div>
     </div>
   </div>
 </section>
@@ -1213,9 +1213,9 @@ cyber_security = head(
       <h2>Security first, in three steps</h2>
     </div>
     <div class="steps reveal">
-      <div class="step"><div class="num"></div><div><h3>Discovery</h3><p>Network-wide asset and access discovery establishes your baseline exposure and produces an actionable remediation plan.</p></div></div>
-      <div class="step"><div class="num"></div><div><h3>Scaling Securely</h3><p>Risks and vulnerabilities are captured in a Written Information Security Plan, reviewed quarterly as new technology emerges.</p></div></div>
-      <div class="step"><div class="num"></div><div><h3>Risk Remediation</h3><p>We monitor the dark web for compromised email addresses and passwords tied to your business and act on them right away.</p></div></div>
+      <div class="step"><div><h3>Discovery</h3><p>Network-wide asset and access discovery establishes your baseline exposure and produces an actionable remediation plan.</p></div></div>
+      <div class="step"><div><h3>Scaling Securely</h3><p>Risks and vulnerabilities are captured in a Written Information Security Plan, reviewed quarterly as new technology emerges.</p></div></div>
+      <div class="step"><div><h3>Risk Remediation</h3><p>We monitor the dark web for compromised email addresses and passwords tied to your business and act on them right away.</p></div></div>
     </div>
   </div>
 </section>
@@ -1275,10 +1275,10 @@ data_center = head(
       <h2>Hosting built around your workload</h2>
     </div>
     <div class="bento">
-      <div class="tile b-md tile-brand reveal"><span class="icon">01</span><h3>Hosted Virtual Servers</h3><p>Dedicated Windows Server environments with maintenance, OS updates, and backup and recovery included.</p></div>
-      <div class="tile b-md reveal"><span class="icon">02</span><h3>Hardware Hosting</h3><p>Rack, half-rack, or full-rack hosting with power redundancy and geographic diversity for failover.</p></div>
-      <div class="tile b-md tile-accent reveal"><span class="icon">03</span><h3>Disaster Recovery</h3><p>RTO and RPO designed around your workflow, on-net with Comcast, Verizon, Level 3, Segra and more.</p></div>
-      <div class="tile b-md reveal"><span class="icon">04</span><h3>Privacy &amp; Compliance</h3><p>SOC II compliant data centers and cloud offerings, audited against the highest security standards.</p></div>
+      <div class="tile b-md tile-brand reveal"><h3>Hosted Virtual Servers</h3><p>Dedicated Windows Server environments with maintenance, OS updates, and backup and recovery included.</p></div>
+      <div class="tile b-md reveal"><h3>Hardware Hosting</h3><p>Rack, half-rack, or full-rack hosting with power redundancy and geographic diversity for failover.</p></div>
+      <div class="tile b-md tile-accent reveal"><h3>Disaster Recovery</h3><p>RTO and RPO designed around your workflow, on-net with Comcast, Verizon, Level 3, Segra and more.</p></div>
+      <div class="tile b-md reveal"><h3>Privacy &amp; Compliance</h3><p>SOC II compliant data centers and cloud offerings, audited against the highest security standards.</p></div>
     </div>
   </div>
 </section>
@@ -1290,9 +1290,9 @@ data_center = head(
       <h2>How does CodeBlue Cloud work?</h2>
     </div>
     <div class="steps reveal">
-      <div class="step"><div class="num"></div><div><h3>Discovery and Alignment</h3><p>A discovery call or site visit to understand your needs, producing real options for your business.</p></div></div>
-      <div class="step"><div class="num"></div><div><h3>Tailored Service Options</h3><p>We shape resources and support around your budget, goals, and requirements.</p></div></div>
-      <div class="step"><div class="num"></div><div><h3>Onboarding and Integration</h3><p>Our team aligns with yours at every stage, from systems management to support metrics.</p></div></div>
+      <div class="step"><div><h3>Discovery and Alignment</h3><p>A discovery call or site visit to understand your needs, producing real options for your business.</p></div></div>
+      <div class="step"><div><h3>Tailored Service Options</h3><p>We shape resources and support around your budget, goals, and requirements.</p></div></div>
+      <div class="step"><div><h3>Onboarding and Integration</h3><p>Our team aligns with yours at every stage, from systems management to support metrics.</p></div></div>
     </div>
   </div>
 </section>
@@ -1380,10 +1380,10 @@ voip = head(
       <h2>Essential features from a leading platform</h2>
     </div>
     <div class="bento">
-      <div class="tile b-md tile-brand reveal"><span class="icon">01</span><h3>Find / Follow Me</h3><p>Calls route to your desk and other specified locations, so you're reachable wherever you're working.</p></div>
-      <div class="tile b-md reveal"><span class="icon">02</span><h3>Visual Voicemail</h3><p>Scan voicemails for key information and search transcripts for names, addresses, and numbers.</p></div>
-      <div class="tile b-md tile-accent reveal"><span class="icon">03</span><h3>Chat and Text</h3><p>Secure internal chat plus image and audio texting, directly through your business phone number.</p></div>
-      <div class="tile b-md reveal"><span class="icon">04</span><h3>HIPAA Compliant Voice</h3><p>Redundant, encrypted endpoints built to meet healthcare regulatory requirements.</p></div>
+      <div class="tile b-md tile-brand reveal"><h3>Find / Follow Me</h3><p>Calls route to your desk and other specified locations, so you're reachable wherever you're working.</p></div>
+      <div class="tile b-md reveal"><h3>Visual Voicemail</h3><p>Scan voicemails for key information and search transcripts for names, addresses, and numbers.</p></div>
+      <div class="tile b-md tile-accent reveal"><h3>Chat and Text</h3><p>Secure internal chat plus image and audio texting, directly through your business phone number.</p></div>
+      <div class="tile b-md reveal"><h3>HIPAA Compliant Voice</h3><p>Redundant, encrypted endpoints built to meet healthcare regulatory requirements.</p></div>
     </div>
   </div>
 </section>
@@ -1449,9 +1449,9 @@ data_cabling = head(
       <h2>How cabling contracting works</h2>
     </div>
     <div class="steps reveal">
-      <div class="step"><div class="num"></div><div><h3>Discovery and Alignment</h3><p>We review technical drawings from your contractor or designer and plan data locations for computers, access points, printers, and smart devices.</p></div></div>
-      <div class="step"><div class="num"></div><div><h3>Tailored Cabling Plan</h3><p>We recommend optimal central and termination points, maximizing function while minimizing cost.</p></div></div>
-      <div class="step"><div class="num"></div><div><h3>Scheduling and Installation</h3><p>Turnkey proposals cover all materials, labor, and documentation, coordinated closely with your general contractor's schedule.</p></div></div>
+      <div class="step"><div><h3>Discovery and Alignment</h3><p>We review technical drawings from your contractor or designer and plan data locations for computers, access points, printers, and smart devices.</p></div></div>
+      <div class="step"><div><h3>Tailored Cabling Plan</h3><p>We recommend optimal central and termination points, maximizing function while minimizing cost.</p></div></div>
+      <div class="step"><div><h3>Scheduling and Installation</h3><p>Turnkey proposals cover all materials, labor, and documentation, coordinated closely with your general contractor's schedule.</p></div></div>
     </div>
   </div>
 </section>
@@ -1463,9 +1463,9 @@ data_cabling = head(
       <h2>Beyond the cable run</h2>
     </div>
     <div class="bento">
-      <div class="tile b-md tile-brand reveal"><span class="icon">01</span><h3>Professional Planning</h3><p>Layout, cable paths, cable management, and code adherence, working independently or alongside your general contractor.</p></div>
-      <div class="tile b-md reveal"><span class="icon">02</span><h3>Data Room Build-Out</h3><p>Rack storage, HIPAA-compliant access tracking, temperature monitoring, camera security, and backup power for your data closet.</p></div>
-      <div class="tile b-md tile-accent reveal"><span class="icon">03</span><h3>Supplies &amp; Materials</h3><p>Authorized supplier for racks, cabinets, patch paneling, fiber optic accessories, and outdoor and underground cabling.</p></div>
+      <div class="tile b-md tile-brand reveal"><h3>Professional Planning</h3><p>Layout, cable paths, cable management, and code adherence, working independently or alongside your general contractor.</p></div>
+      <div class="tile b-md reveal"><h3>Data Room Build-Out</h3><p>Rack storage, HIPAA-compliant access tracking, temperature monitoring, camera security, and backup power for your data closet.</p></div>
+      <div class="tile b-md tile-accent reveal"><h3>Supplies &amp; Materials</h3><p>Authorized supplier for racks, cabinets, patch paneling, fiber optic accessories, and outdoor and underground cabling.</p></div>
     </div>
   </div>
 </section>
@@ -1524,9 +1524,9 @@ premise_security = head(
       <h2>Three solution areas, one integrated system</h2>
     </div>
     <div class="bento">
-      <div class="tile b-md tile-brand reveal"><span class="icon">01</span><h3>Outdoor Camera Solutions</h3><p>From static parking lot cameras to mobile units with color low-light imaging and face and license plate detection.</p></div>
-      <div class="tile b-md reveal"><span class="icon">02</span><h3>Indoor Camera Solutions</h3><p>Professionally sourced and installed by licensed DCJS technicians, matched to the area they protect and discreetly integrated.</p></div>
-      <div class="tile b-md tile-accent reveal"><span class="icon">03</span><h3>Smart Access Control</h3><p>Custom-designed around your entrances and exits, with seamless integration between access control and cameras.</p></div>
+      <div class="tile b-md tile-brand reveal"><h3>Outdoor Camera Solutions</h3><p>From static parking lot cameras to mobile units with color low-light imaging and face and license plate detection.</p></div>
+      <div class="tile b-md reveal"><h3>Indoor Camera Solutions</h3><p>Professionally sourced and installed by licensed DCJS technicians, matched to the area they protect and discreetly integrated.</p></div>
+      <div class="tile b-md tile-accent reveal"><h3>Smart Access Control</h3><p>Custom-designed around your entrances and exits, with seamless integration between access control and cameras.</p></div>
     </div>
   </div>
 </section>
@@ -1715,7 +1715,7 @@ for d in industries_data:
       <h2>What {d['name'].replace('&amp;', '&')} businesses get from CodeBlue</h2>
     </div>
     <div class="bento">
-      {"".join(f'<div class="tile b-md reveal"><span class="icon">{i+1:02d}</span><p>{b}</p></div>' for i, b in enumerate(d['bullets']))}
+      {"".join(f'<div class="tile b-md reveal"><p>{b}</p></div>' for i, b in enumerate(d['bullets']))}
     </div>
   </div>
 </section>

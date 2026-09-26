@@ -387,14 +387,8 @@ body.nav-open { overflow: hidden; }
 .split-media { border-radius: var(--radius-card); overflow: hidden; border: 1px solid var(--line); position: relative; min-height: 280px; }
 
 /* ---- Steps ---- */
-.steps { counter-reset: step; display: flex; flex-direction: column; gap: 22px; }
+.steps { display: flex; flex-direction: column; gap: 22px; }
 .step { display: flex; gap: 16px; }
-.step .num {
-  counter-increment: step; flex: none; width: 36px; height: 36px; border-radius: 50%;
-  background: var(--ink); color: var(--bg); font-weight: 700; font-family: "JetBrains Mono", monospace;
-  display: flex; align-items: center; justify-content: center;
-}
-.step .num::before { content: counter(step); }
 
 /* ---- Rep form (3 fields, glass) ---- */
 .rep-form { border-radius: var(--radius-card); padding: 28px; }
