@@ -390,6 +390,25 @@ body.nav-open { overflow: hidden; }
 .steps { display: flex; flex-direction: column; gap: 22px; }
 .step { display: flex; gap: 16px; }
 
+/* ---- Timeline (company history) ---- */
+.timeline { position: relative; display: flex; flex-direction: column; }
+.timeline::before {
+  content: ""; position: absolute; left: 27px; top: 6px; bottom: 6px; width: 2px;
+  background: var(--line);
+}
+.timeline-item { position: relative; display: flex; gap: 20px; padding: 16px 0; }
+.timeline-year {
+  flex: none; width: 56px; height: 56px; border-radius: 50%;
+  background: var(--brand-blue); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 0.82rem;
+  position: relative; z-index: 1; box-shadow: 0 0 0 4px var(--bg);
+}
+.timeline-item.is-future .timeline-year { background: var(--brand-green); }
+.timeline-body { padding-top: 6px; }
+.timeline-body h3 { margin-bottom: 0.2em; }
+.timeline-body p { margin-bottom: 0; }
+
 /* ---- Rep form (3 fields, glass) ---- */
 .rep-form { border-radius: var(--radius-card); padding: 28px; }
 .rep-form h3 { margin-bottom: 4px; }
