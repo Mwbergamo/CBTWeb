@@ -23,6 +23,7 @@ NAV_SOLUTIONS = [
     ("Voice / VoIP", "voip.html"),
     ("Data Cabling", "data-cabling.html"),
     ("Premise Security & Cameras", "premise-security.html"),
+    ("Starlink Installation", "starlink.html"),
 ]
 
 TOP_NAV = [
@@ -1381,6 +1382,92 @@ northern_neck = head(
 </main>
 """ + footer()
 write("northern-neck.html", northern_neck)
+
+# ---------------------------------------------------------------------------
+# STARLINK INSTALLATION
+# ---------------------------------------------------------------------------
+starlink = head(
+    "Starlink Installation | Certified Starlink Installer | CodeBlue Technology",
+    "CodeBlue Technology is a certified Starlink installer for homes and businesses across Central Virginia and the Northern Neck. High-speed, low-latency satellite internet, professionally installed and managed."
+) + header("starlink.html") + f"""
+<main id="main">
+{hero(
+    "Starlink Installation",
+    "Certified Starlink Installer for Home and Business",
+    "Starlink remains one of the fastest growing, low-latency internet solutions available, and CodeBlue is your local, certified installer. Whether you need high-speed broadband-comparable service for your business or a reliable connection at home, we handle sourcing, installation, and configuration end to end.",
+    f'<a href="contact.html" class="btn btn-primary">Contact our Starlink experts</a><a href="tel:{PHONE_TEL}" class="btn btn-ghost">Call {PHONE}</a>',
+    media=photo_fill("images/hero-starlink.jpg", "A satellite constellation view of Starlink internet coverage from orbit"),
+)}
+
+{stat_strip()}
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div class="brand-rule"></div>
+      <h2>Built-in speed, tailored to your business</h2>
+    </div>
+    <div class="split reveal" style="align-items:start;">
+      <div>
+        <p>Starlink has many business applications. CodeBlue is here to help ensure the service is tailored to your unique data usage, installed where it will work best and look best. Our installation team works to integrate your satellite internet with your business network to support your most important applications, things like cloud-hosted applications, Microsoft 365, Voice over IP, and fail-over internet.</p>
+        <div class="hero-ctas" style="margin-top:18px;">
+          <a href="contact.html" class="btn btn-primary">Contact our Starlink experts</a>
+        </div>
+      </div>
+      <div class="split-media">
+        {photo_fill("images/starlink-rooftop-mounts.jpg", "Examples of professionally mounted Starlink dish installations on business rooftops")}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head">
+      <div class="brand-rule"></div>
+      <h2>What can you expect from Starlink with CodeBlue?</h2>
+    </div>
+    <div class="bento">
+      <div class="tile b-md tile-brand reveal"><h3>End-to-End Service Management</h3><p>CodeBlue handles everything, from sourcing and procurement to professional installation and configuration, for a seamless, hassle-free transition to Starlink connectivity.</p></div>
+      <div class="tile b-md reveal"><h3>Expert Configuration for Maximum Uptime</h3><p>With deep technical expertise, CodeBlue optimizes Starlink systems for business-critical environments, including network integration, redundancy, and remote access configurations.</p></div>
+      <div class="tile b-md tile-accent reveal"><h3>Ongoing Support &amp; Local Accountability</h3><p>Unlike DIY setups or anonymous resellers, CodeBlue provides local, responsive support with real accountability, helping businesses maintain performance long after the install.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head">
+      <div class="brand-rule"></div>
+      <h2>Starlink vs. cellular: choosing the right fit</h2>
+    </div>
+    <div class="split reveal" style="align-items:start;">
+      <div class="card reveal">
+        <h3>When cellular makes sense</h3>
+        <p>In urban or suburban zones with strong LTE or 5G coverage, cellular internet can still be the faster, more economical option. Cellular routers provide quick deployment, flexible data plans, and seamless mobility for field teams or temporary setups. For businesses with reliable carrier signals and modest bandwidth needs, cellular can deliver low-latency performance at a lower monthly cost.</p>
+      </div>
+      <div class="card reveal">
+        <h3>When Starlink makes sense</h3>
+        <p>Beyond the reach of reliable towers, or where multiple users and high throughput are required, Starlink's satellite backbone ensures more consistent connectivity. The right choice depends on your location, bandwidth needs, and cost sensitivity, and CodeBlue Technology can help you make it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="cta-panel reveal">
+      <h2>Reliable internet, managed for business.</h2>
+      <p>Starlink by CodeBlue Technology is your affordable, high-performance alternative to spotty cellular or risky single-connection setups. We handle everything from procurement to installation and ongoing support, giving you a high-performance alternative or complement to cellular with predictable costs and local accountability.</p>
+      <div class="hero-ctas">
+        <a href="contact.html" class="btn btn-primary">Contact us!</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+""" + footer()
+write("starlink.html", starlink)
 
 # ---------------------------------------------------------------------------
 # CONTACT
